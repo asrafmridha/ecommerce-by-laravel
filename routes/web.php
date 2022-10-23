@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,10 @@ Route::get('/', function () {
 
     //Category Routes
     Route::resource('category', CategoryController::class);
+    //SubCategory Routes
+    Route::resource('subcategory', SubCategoryController::class);
+
+
  
     
 
