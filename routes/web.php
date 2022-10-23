@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +16,36 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
+
+//   For Admin or user check
+
+  Route::get('/dashboard', function () {
+    return view('backend.admin.home');
+   })->middleware(['is_admin'])->name('dashboard');
+
+
+
+  Route::group(['prefix'=>'/admin','middleware'=>['auth']],function(){
+
+    //Category Routes
+    Route::resource('category', CategoryController::class);
+ 
+    
+
+
+
+
+
+
+}); 

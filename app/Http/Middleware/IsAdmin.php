@@ -20,7 +20,8 @@ class IsAdmin
             return $next($request);
         }
 
-        return redirect()->route('home')->with('message','You are Not Admin');
+        
+         return redirect()->route('home')->with('error','You are Not Admin');
         
     }
 }
