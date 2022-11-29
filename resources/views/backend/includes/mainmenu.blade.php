@@ -1,5 +1,15 @@
  <!-- BEGIN: Main Menu-->
- <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+<div class="main-menu menu-fixed
+    @if(themesetting(Auth::id()) == null)
+       menu-light
+    @else
+        @if(themesetting(Auth::id())->theme == 'light-layout')
+        menu-light
+        @else
+        menu-dark
+        @endif
+        @endif
+ menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html"><span class="brand-logo">

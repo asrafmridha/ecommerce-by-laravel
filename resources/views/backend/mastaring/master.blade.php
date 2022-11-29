@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
+<html class="loading
+ {{ (themesetting(Auth::id()) == null) ? 'light-layout' : themesetting(Auth::id())->theme }}
+
+" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
 <head>
