@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\ThemeSettingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 })->name('home');
 
 // Route::middleware([
@@ -31,26 +33,33 @@ Route::get('/', function () {
 
 //   For Admin or user check
 
-  Route::get('/dashboard', function () {
-    return view('backend.admin.home');
-   })->middleware(['is_admin'])->name('dashboard');
+Route::get('/dashboard', function () {
+  return view('backend.admin.home');
+})->middleware(['is_admin'])->name('dashboard');
 
 
 
-  Route::group(['prefix'=>'/admin','middleware'=>['auth']],function(){
+Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
-    //Category Routes
-    Route::resource('category', CategoryController::class);
-    //SubCategory Routes
-    Route::resource('subcategory', SubCategoryController::class);
+  //Category Routes
+  Route::resource('category', CategoryController::class);
+  //Category Mass Delete
+  Route::get('category/mass/delete', [CategoryController::class, 'CategoryMassDelete'])->name('category.bulkDelete');
+
+  //SubCategory Routes
+  Route::resource('subcategory', SubCategoryController::class);
+
+  //Theme Color
+  Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
+
+  Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
 
 
- 
-    
+  Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
 
+  Route::post('admin/profile/update/{id}', [ProfileController::class, 'profile_update'])->name('admin.profile.update');
 
+  Route::post('admin/update/{id}', [ProfileController::class, 'update'])->name('admin.update');
 
-
-
-
-}); 
+  Route::post('reset/password', [ProfileController::class, 'reset_password'])->name('reset-password');
+});

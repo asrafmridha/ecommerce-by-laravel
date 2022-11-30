@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::paginate(5);
-        return view('backend.admin.category.category',compact('category'));
+        $category = Category::paginate(5);
+        return view('backend.admin.category.category', compact('category'));
     }
 
     /**
@@ -27,7 +27,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -39,11 +38,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_name'=>'required',
+            'category_name' => 'required',
         ]);
-        $category=new Category();
-        $category->category_name=$request->category_name;
-        $category->category_slug=Str::slug($request->category_name, '-');
+        $category = new Category();
+        $category->category_name = $request->category_name;
+        $category->category_slug = Str::slug($request->category_name, '-');
         $category->save();
         return back()->withSuccess('Data Saved Successfuuly');
     }
@@ -93,5 +92,13 @@ class CategoryController extends Controller
     {
         Category::find($id)->delete();
         return back()->withSuccess('Category Delete Successfully');
+    }
+
+    public function CategoryMassDelete(Request $request)
+    {
+        // dd($request->ids);
+        $category = Category::findMany($request->ids);
+        $category->each->delete();
+        return response()->json(['success' => 'Successfully Delete']);
     }
 }
