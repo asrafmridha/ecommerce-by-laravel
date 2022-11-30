@@ -18,7 +18,7 @@
 <!-- BEGIN: Body-->
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static 
-    {{-- @if(themesetting(Auth::id()) == null)
+    @if(themesetting(Auth::id()) == null)
       menu-expanded
     @else
          @if(themesetting(Auth::id())->nav == 'collapsed')
@@ -26,7 +26,7 @@
          @else
             menu-expanded
         @endif
-    @endif  --}}
+    @endif 
 " data-open="click" data-menu="vertical-menu-modern" data-col="">
 
     <!-- BEGIN: Header-->
