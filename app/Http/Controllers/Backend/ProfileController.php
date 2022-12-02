@@ -16,16 +16,11 @@ class ProfileController extends Controller
 
     public function profile_update(Request $request, $id)
     {
-
         $request->validate([
             'image' => 'required|image',
-
         ]);
-
-        // $data = User::where('id', $id);
         $data = User::find($id);
         if ($data->image == null) {
-
             $image = $request->image;
             $filename = time() . '.' . $image->extension();
             $location = public_path('uploads/user/');

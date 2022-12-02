@@ -18,7 +18,7 @@
 {{-- Data Filter Start --}}
 <div class="card-body">
     <div class="btn-group"> 
-        <button data-toggle="modal" data-target="#AddCategoryModal" class="end btn btn-primary">Add Category</button>  
+        <button data-toggle="modal" data-target="#AddsubcategoryModal" class="end btn btn-primary">Add subcategory</button>  
         <a data-toggle="modal" data-target="#feedbackcsvModal" class="end btn btn-success"
             href="">Import</a>
             
@@ -81,7 +81,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Total Category ({{ $category->count() }})</h4>
+                <h4 class="card-title">Total subcategory ({{ $subcategory->count() }})</h4>
             </div>  
             <div class="table-responsive " >
                 <table class="table table-white " >
@@ -98,13 +98,13 @@
                                             for="colorCheck1"></label>
                                     </div> 
                             </th>
-                            <th>Category</th>
-                            <th>Category Slug</th>
+                            <th>subsubcategory</th>
+                            <th>subcategory Slug</th>
                             <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                  @foreach ( $category as $category) 
+                                  @foreach ( $subcategory as $subcategory) 
                                 <tr>
                                     <td>
                                         <div class="custom-control custom-control-primary custom-checkbox">
@@ -114,8 +114,8 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
-                                    <td>{{ $category->category_name }}</td>
-                                    <td>{{ $category->category_slug }}</td>
+                                    <td>{{ $subcategory->subcategory_name }}</td>
+                                    <td>{{ $subcategory->subcategory_slug }}</td>
                                             
                                         <td>
                                             <div class="dropdown">
@@ -123,11 +123,11 @@
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <button data-target="#updateCategoryModal__{{ $category->id }}" data-toggle="modal"class="dropdown-item" href="javascript:void(0);">
+                                                    <button data-target="#updatesubcategoryModal__{{ $subcategory->id }}" data-toggle="modal"class="dropdown-item" href="javascript:void(0);">
                                                         <i data-feather="edit-2" class="mr-50"></i>
                                                         <span>Edit</span>
                                                                                                                                      </button>
-                                                    <button data-target="#delete_category__{{ $category->id }}" data-toggle="modal" type="submit" class="dropdown-item" href="javascript:void(0);">
+                                                    <button data-target="#delete_subcategory__{{ $subcategory->id }}" data-toggle="modal" type="submit" class="dropdown-item" href="javascript:void(0);">
                                                         <i data-feather="trash" class="mr-50"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -136,8 +136,8 @@
                                         </td>
                                 </tr>
 
-                                    {{-- Modal for category  delete  --}}
-                                    <div class="modal fade" id="delete_category__{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    {{-- Modal for subcategory  delete  --}}
+                                    <div class="modal fade" id="delete_subcategory__{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -147,10 +147,10 @@
                                                                 </button>
                                                 </div> 
                                                 <div class="modal-body text-white bg-dark">
-                                                    <form action="{{ route('category.destroy',$category->id) }}" method="POST">
+                                                    <form action="{{ route('subcategory.destroy',$subcategory->id) }}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                            Are you sure want to delete this Category?
+                                                            Are you sure want to delete this subcategory?
                                                     
                                                         <div class="modal-footer">
                                                                     <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
@@ -162,23 +162,23 @@
                                         </div>
                                     </div>      
                                     
-                                    {{-- Modal For add  Update Category   --}}
-                                    <div class="modal fade" id="updateCategoryModal__{{ $category->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    {{-- Modal For add  Update subcategory   --}}
+                                    <div class="modal fade" id="updatesubcategoryModal__{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update Category</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Update subcategory</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{ route('category.update',$category->id) }}" method="POST">
+                                                    <form action="{{ route('subcategory.update',$subcategory->id) }}" method="POST">
                                                         @method('PUT')
                                                     @csrf
-                                                    <label for="category_name">Enter  Update Category Name</label>
-                                                    <input type="text" name="category_name" class="mt-1 form-control import" value="{{ $category->category_name }}" >
-                                                        @error('category_name')
+                                                    <label for="subcategory_name">Enter  Update subcategory Name</label>
+                                                    <input type="text" name="subcategory_name" class="mt-1 form-control import" value="{{ $subcategory->subcategory_name }}" >
+                                                        @error('subcategory_name')
                                                         <div class="alert alert-danger">
                                                             {{$message}}
                                                         </div>  
@@ -196,7 +196,7 @@
                                
                             </tbody>
                         </table>
-                                        {{-- {{ $category->links('vendor.pagination.custom') }} --}}
+                                        {{-- {{ $subcategory->links('vendor.pagination.custom') }} --}}
                 </div>
         </div>
     </div>
@@ -229,31 +229,40 @@
 {{-- End mass delete modal --}}
 
 @endsection
-{{-- Modal For add  Add Category   --}}
-<div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- Modal For   Add subcategory   --}}
+<div class="modal fade" id="AddsubcategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add SubCategory</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('category.store') }}" method="POST">
-                @csrf
-                <label for="category_name">Enter Category Name</label>
-                <input type="text" name="category_name" class="mt-1 form-control import" >
-                    @error('category_name')
+                <form action="{{ route('subcategory.store') }}" method="POST">
+                    @csrf
+                    <label for="subcategory_name">Category Name</label>
+                    <select class="form-control" aria-label="Default select example" name="category_id">
+
+                        @foreach ($category as $category)
+                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                        @endforeach
+
+                    </select>
+
+                     <label for="sub_category_name">Enter SubCategory Name</label>
+                    <input type="text" name="sub_category_name" class="mt-1 form-control import" >
+                    @error('sub_category_name')
                     <div class="alert alert-danger">
                         {{$message}}
                     </div>  
                     @enderror 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save</button>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </form>
         </div>
     </div>
@@ -261,102 +270,3 @@
 
 
 
-@section('js')
-    <script>
-        $(document).ready(function() {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            //select all feature
-            $('.select_all').change(function() {
-                ids = []
-                if ($(this).is(":checked")) {
-                    $('.select_item').prop('checked', true);
-                    $('.select_item').each(function() {
-                        ids.push($(this).attr('id').split('_')[2]);
-                    });
-                    if (ids.length == 0) {
-                        $('#all_action').addClass('d-none');
-                    } else {
-                        $('#all_action').removeClass('d-none');
-                        $('#export_id').val(ids);
-                    }
-                } else {
-                    $('.select_item').prop('checked', false);
-                    $('#all_action').addClass('d-none');
-                }
-                $(document).on('click', '#mass_delete', function(){
-                $('#mass_delete').click(function() {
-                    $.ajax({
-                        type: 'get',
-                        url: "{{ route('category.bulkDelete') }}",
-                        data: {
-                            'ids': ids
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                toastr.success(response.success);
-                                $('#all_action').addClass('d-none');
-                                window.location.reload();
-                            }
-                        }
-                    })
-                });
-            });
-            //individual select feature
-            $('.select_item').change(function() {
-                ids = []
-                $('.select_item').each(function() {
-                    if ($(this).is(":checked")) {
-                        ids.push($(this).attr('id').split('_')[2]);
-                    }
-                });
-                if (ids.length == 0) {
-                    $('#all_action').addClass('d-none');
-                    $('.select_all').prop('checked', false);
-                } else {
-                    $('#all_action').removeClass('d-none');
-                    $('#export_id').val(ids);
-                }
-                $(document).on('click', '#mass_delete', function(e) {
-                    $.ajax({
-                        type: 'get',
-                        url: "{{ route('category.bulkDelete') }}",
-                        data: {
-                            'ids': ids
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                toastr.success(response.success);
-                                $('#all_action').addClass('d-none');
-                                window.location.reload();
-                            }
-                        }
-                    })
-                });
-            });
-            // seach
-            $('#search').keyup(function() {
-                var value = $(this).val().toLowerCase();
-                $('#service_table tr').filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
-                });
-            });
-            //service search
-            $('#search').keyup(function(){
-                var value = $(this).val();
-                $.ajax({
-                    type:'get',
-                    url:"",
-                    data:{'value':value},  
-                    success:function(response){                  
-                            $('#data_table').html(response);
-                    }
-                });
-            });
-        });
-    });
-    </script>
-@endsection

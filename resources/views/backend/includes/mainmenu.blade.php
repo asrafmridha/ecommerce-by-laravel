@@ -8,8 +8,8 @@
         @else
         menu-dark
         @endif
-        @endif
- menu-accordion menu-shadow" data-scroll-to-active="true">
+    @endif
+    menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" href="../../../html/ltr/vertical-menu-template/index.html"><span class="brand-logo">
@@ -38,7 +38,12 @@
                         </svg></span>
                     <h2 class="brand-text">Vuexy</h2>
                 </a></li>
-            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
+            <li class="nav-item nav-toggle"> 
+                <a class="nav-link modern-nav-toggle pr-0" id="toggle" data-toggle="collapse">
+                    <i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i>
+                    <i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i>
+                </a>
+            </li>
         </ul>
     </div>
     <div class="shadow-bottom"></div>
@@ -49,24 +54,27 @@
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Admin &amp; Pages</span><i data-feather="more-horizontal"></i>
             </li>
-                
-        
-        
 
-        <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Category</span></a>
+        <li class="@yield('category') nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Category</span></a>
             <ul class="menu-content">
-                <li><a class="d-flex align-items-center" href="{{ route('category.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Category</span></a>
+                <li>
+                    <a class="d-flex align-items-center" href="{{ route('category.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Category</span>
+                    </a>
                 </li>
-                <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Sub Category</span></a>
+                <li>
+                    <a class=" d-flex align-items-center" href="{{ route('subcategory.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Sub Category</span>
+                    </a>
                 </li>
-                <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Child Category</span></a>
+                <li>
+                    <a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Child Category</span>
+                    </a>
                 </li>
-                <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Brand</span></a>
+                <li>
+                    <a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Brand</span>
+                    </a>
                 </li>
             </ul>
-
         </li>
-
         </ul>
     </div>
 </div>

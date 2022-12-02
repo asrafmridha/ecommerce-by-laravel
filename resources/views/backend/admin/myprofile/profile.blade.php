@@ -47,15 +47,11 @@
                     <div class="card-body py-2">
                         
                             <div class="d-flex flex-wrap align-items-end">
-                                {{-- <div class="mr-1 mb-1">
-                                  <img src="{{('uploads/user/'.Auth::user()->image)  }}" class="uploadedAvatar rounded object-fit--cover" alt="profile image" width="100" height="100">
-                                </div> --}}
-
                                 <form action="{{ route('admin.profile.update',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex flex-wrap align-items-end">
                                         <div class="mr-1 mb-1">
-                                          <img src="{{('uploads/user/'.Auth::user()->image)  }}" class="uploadedAvatar rounded object-fit--cover" alt="profile image" width="100" height="100">
+                                            <img src="{{ asset('uploads/user/'.Auth::user()->image)}}" class="uploadedAvatar rounded object-fit--cover" alt="profile image" width="100" height="100">
                                         </div>
                                         <!-- upload and reset button -->
                                         <div class="d-flex align-items-end mb-1">
