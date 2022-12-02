@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\ThemeSettingController;
+use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,9 +41,9 @@ Route::get('/dashboard', function () {
 
 
 Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
-
   //Category Routes
   Route::resource('category', CategoryController::class);
+
   //Category Mass Delete
   Route::get('category/mass/delete', [CategoryController::class, 'CategoryMassDelete'])->name('category.bulkDelete');
 
