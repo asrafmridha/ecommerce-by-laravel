@@ -1,12 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,10 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $category = Category::all();
+        $subcategory = SubCategory::all();
+        return view('backend.admin.category.subcategory', compact('category', 'subcategory'));
     }
 
     /**
@@ -35,7 +47,19 @@ class SubCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'sub_category_name' => 'required|max:50',
+        ]);
+
+        $subcategory = new SubCategory();
+        $subcategory->category_id = $request->category_id;
+        $subcategory->sub_category_name = $request->sub_category_name;
+        $subcategory->sub_category_slug = Str::slug($request->sub_category_name, '-');
+
+        $subcategory->save();
+
+        return back()->withSuccess('Subcategory Added Successfully');
     }
 
     /**
