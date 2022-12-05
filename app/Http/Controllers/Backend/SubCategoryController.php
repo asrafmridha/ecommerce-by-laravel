@@ -93,7 +93,17 @@ class SubCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+            'sub_category_name' => 'required|max:50',
+        ]);
+
+        $subcategory = SubCategory::find($id);
+        $subcategory->sub_category_name = $request->sub_category_name;
+
+        $subcategory->update();
+
+        return back()->withSuccess('Subcategory Added Successfully');
     }
 
     /**
@@ -104,6 +114,7 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        SubCategory::find($id)->delete();
+        return back()->withSuccess('Subcategory Deleted Successfully');
     }
 }

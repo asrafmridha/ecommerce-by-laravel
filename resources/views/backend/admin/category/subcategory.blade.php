@@ -98,7 +98,7 @@
                                             for="colorCheck1"></label>
                                     </div> 
                             </th>
-                            <th>subsubcategory</th>
+                            <th>subcategory name</th>
                             <th>subcategory Slug</th>
                             <th>Action</th>
                             </tr>
@@ -114,8 +114,8 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
-                                    <td>{{ $subcategory->subcategory_name }}</td>
-                                    <td>{{ $subcategory->subcategory_slug }}</td>
+                                    <td>{{ $subcategory->sub_category_name }}</td>
+                                    <td>{{ $subcategory->sub_category_name }}</td>
                                             
                                         <td>
                                             <div class="dropdown">
@@ -127,7 +127,7 @@
                                                         <i data-feather="edit-2" class="mr-50"></i>
                                                         <span>Edit</span>
                                                                                                                                      </button>
-                                                    <button data-target="#delete_subcategory__{{ $subcategory->id }}" data-toggle="modal" type="submit" class="dropdown-item" href="javascript:void(0);">
+                                                    <button data-target="#delete_subcategory__{{ $subcategory->id }}" data-toggle="modal" type="submit" class=" dropdown-item" href="javascript:void(0);">
                                                         <i data-feather="trash" class="mr-50"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -162,7 +162,7 @@
                                         </div>
                                     </div>      
                                     
-                                    {{-- Modal For add  Update subcategory   --}}
+                                    {{-- Modal For   Update subcategory   --}}
                                     <div class="modal fade" id="updatesubcategoryModal__{{ $subcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -176,9 +176,20 @@
                                                     <form action="{{ route('subcategory.update',$subcategory->id) }}" method="POST">
                                                         @method('PUT')
                                                     @csrf
-                                                    <label for="subcategory_name">Enter  Update subcategory Name</label>
-                                                    <input type="text" name="subcategory_name" class="mt-1 form-control import" value="{{ $subcategory->subcategory_name }}" >
+                                                   <label for="subcategory_name">Category Name</label>
+                                                    <select class="form-control" aria-label="Default select example" name="category_id">
+
+                                                        <option value="{{ $subcategory->category->id }}">{{ $subcategory->category->category_name }}</option>
+                                                    </select>
                                                         @error('subcategory_name')
+                                                        <div class="alert alert-danger">
+                                                            {{$message}}
+                                                        </div>  
+                                                        @enderror 
+
+                                                        <label for="sub_category_name">Enter SubCategory Name</label>
+                                                        <input type="text" name="sub_category_name" class="mt-1 form-control import" value="{{ $subcategory->sub_category_name }}" >
+                                                        @error('sub_category_name')
                                                         <div class="alert alert-danger">
                                                             {{$message}}
                                                         </div>  
@@ -251,7 +262,7 @@
 
                     </select>
 
-                     <label for="sub_category_name">Enter SubCategory Name</label>
+                    <label for="sub_category_name">Enter SubCategory Name</label>
                     <input type="text" name="sub_category_name" class="mt-1 form-control import" >
                     @error('sub_category_name')
                     <div class="alert alert-danger">
@@ -267,6 +278,11 @@
         </div>
     </div>
 </div> 
+
+
+
+
+ 
 
 
 
