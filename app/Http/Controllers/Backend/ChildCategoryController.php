@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\ChildCategory;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Contracts\DataTable;
 
@@ -21,7 +23,9 @@ class ChildCategoryController extends Controller
     }
     public function index()
     {
-        
+        $childcategory = ChildCategory::all();
+        $category = Category::all();
+        return view('backend.admin.category.childcategory', compact('childcategory', 'category'));
     }
 
     /**
