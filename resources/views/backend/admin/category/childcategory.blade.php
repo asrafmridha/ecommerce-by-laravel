@@ -150,10 +150,10 @@
                                                                 </button>
                                                 </div> 
                                                 <div class="modal-body text-white bg-dark">
-                                                    <form action="{{ route('subcategory.destroy',$childcategory->id) }}" method="POST">
+                                                    <form action="{{ route('childcategory.destroy',$childcategory->id) }}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                            Are you sure want to delete this subcategory?
+                                                            Are you sure want to delete this ChildCategory?
                                                     
                                                         <div class="modal-footer">
                                                                     <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
