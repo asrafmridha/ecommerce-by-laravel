@@ -9,6 +9,7 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Contracts\DataTable;
+use Illuminate\Support\Str;
 
 class ChildCategoryController extends Controller
 {
@@ -55,7 +56,19 @@ class ChildCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $childcategory = new ChildCategory();
+
+        // $catId = SubCategory::where('id', $request->subcategory_id)->first();
+        $catId = DB::table('sub_categories')->where('id', $request->subcategory_id)->first();
+
+        $childcategory->category_id = $catId->category_id;
+        $childcategory->subcategory_id = $request->subcategory_id;
+        $childcategory->childcategory_name = $request->child_category_name;
+        $childcategory->childcategory_slug = Str::slug($request->child_category_name, '-');
+
+        $childcategory->save();
+
+        return back()->withSuccess('ChildCategory Added Successfully');
     }
 
     /**

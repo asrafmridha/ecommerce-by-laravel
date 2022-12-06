@@ -255,17 +255,16 @@
                 <form action="{{ route('childcategory.store') }}" method="POST">
                     @csrf
                     <label for="subcategory_name">Category/SubCategory Name</label>
-                    <select class="form-control" aria-label="Default select example" name="category_id">
+                    <select class="form-control" aria-label="Default select example" name="subcategory_id">
 
                         @foreach ($category as $category)
-
-                       
-                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                        @php
+                            @php
+                                
+                                $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
                             
-                            $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
-                           
-                        @endphp  
+                            @endphp 
+                                <option>{{ $category->category_name }}</option>
+                        
                        
                             @foreach ($subcategory as $subcat)
                             <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
@@ -276,7 +275,7 @@
                     </select>
 
                     <label for="sub_category_name">Enter ChildCategory Name</label>
-                    <input type="text" name="sub_category_name" class="form-control import" >
+                    <input type="text" name="child_category_name" class="form-control import" >
                     @error('sub_category_name')
                     <div class="alert alert-danger">
                         {{$message}}
@@ -291,11 +290,3 @@
         </div>
     </div>
 </div> 
-
-
-
-
- 
-
-
-
