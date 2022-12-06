@@ -259,16 +259,16 @@
 
                         @foreach ($category as $category)
 
-                        {{-- @php
-                            
-                            $subcat=DB::table('sub_categories ')->where('category_id',$category->id)->get();
-                           
-                        @endphp   --}}
+                       
                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-
+                        @php
+                            
+                            $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
+                           
+                        @endphp  
                        
                             @foreach ($subcategory as $subcat)
-                            <option value="{{ $subcat->id }}">-----{{ $subcat->sub_category_name }}</option>
+                            <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
 
                             @endforeach
                         @endforeach
