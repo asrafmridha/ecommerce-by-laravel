@@ -115,8 +115,10 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
-                                    <td>{{ $childcategory->sub_category_name }}</td>
-                                    <td>{{ $childcategory->sub_category_name }}</td>
+                                    <td>{{ $childcategory->childcategory_name }}</td>
+                                    <td>{{ $childcategory->category->category_name }}</td>
+
+                                     <td>{{ $childcategory->sub_category->sub_category_name }}</td>
                                             
                                         <td>
                                             <div class="dropdown">
