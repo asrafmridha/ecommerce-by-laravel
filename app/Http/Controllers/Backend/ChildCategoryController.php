@@ -60,7 +60,7 @@ class ChildCategoryController extends Controller
 
         // $catId = SubCategory::where('id', $request->subcategory_id)->first();
         $catId = DB::table('sub_categories')->where('id', $request->subcategory_id)->first();
-
+   
         $childcategory->category_id = $catId->category_id;
         $childcategory->subcategory_id = $request->subcategory_id;
         $childcategory->childcategory_name = $request->child_category_name;
