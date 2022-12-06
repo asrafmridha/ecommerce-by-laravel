@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Models\SubCategory;
@@ -50,12 +51,17 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   //SubCategory Routes
   Route::resource('subcategory', SubCategoryController::class);
 
+  //ChildCategory Routes
+  Route::resource('childcategory', ChildCategoryController::class);
+
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
 
   Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
 
 
+
+  //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
 
   Route::post('admin/profile/update/{id}', [ProfileController::class, 'profile_update'])->name('admin.profile.update');

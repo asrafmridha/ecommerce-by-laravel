@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Child Category</span>
+                    <a class="d-flex align-items-center" href="{{ route('childcategory.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Child Category</span>
                     </a>
                 </li>
                 <li>
