@@ -20,7 +20,9 @@
                         
                        
                             @foreach ($subcategory as $subcat)
-                            <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
+                            <option value="{{ $subcat->id }}" @if ($subcat->id==$childcategory->subcategory_id)
+                                selected
+                            @endif>-----  {{ $subcat->sub_category_name }}  ------</option>
 
                             @endforeach
                         @endforeach
