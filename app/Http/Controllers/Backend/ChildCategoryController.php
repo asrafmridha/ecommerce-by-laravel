@@ -33,7 +33,7 @@ class ChildCategoryController extends Controller
 
         $subcategory = SubCategory::all();
 
-        // $subcat = DB::table('sub_categories ')->where('category_id', $category->id);
+        //$subcat = DB::table('sub_categories ')->where('category_id', $category->id);
         // dd($subcat);
         return view('backend.admin.category.childcategory', compact('childcategory', 'category', 'subcategory'));
     }
@@ -45,7 +45,6 @@ class ChildCategoryController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -90,7 +89,13 @@ class ChildCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $childcategory = ChildCategory::find($id);
+
+        $category = Category::all();
+
+        $subcategory = SubCategory::all();
+        return view('backend.admin.category.edit_childcategory', compact('childcategory', 'category', 'subcategory'));
     }
 
     /**
@@ -102,7 +107,19 @@ class ChildCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $childcategory = ChildCategory::find($id);
+
+        // $catId = SubCategory::where('id', $request->subcategory_id)->first();
+        $catId = DB::table('sub_categories')->where('id', $request->subcategory_id)->first();
+
+        $childcategory->category_id = $catId->category_id;
+        $childcategory->subcategory_id = $request->subcategory_id;
+        $childcategory->childcategory_name = $request->child_category_name;
+        $childcategory->childcategory_slug = Str::slug($request->child_category_name, '-');
+
+        $childcategory->update();
+
+        return back()->withSuccess('ChildCategory Update Successfully');
     }
 
     /**
@@ -113,6 +130,7 @@ class ChildCategoryController extends Controller
      */
     public function destroy($id)
     {
+
         ChildCategory::find($id)->delete();
         return back()->withSuccess('Deleted ChildCategory Successfully');
     }
