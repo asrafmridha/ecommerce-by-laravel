@@ -82,7 +82,7 @@
              <li class="@yield('setting') nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Setting</span></a>
             <ul class="menu-content">
                 <li>
-                    <a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">SEO Setting</span>
+                    <a class="d-flex align-items-center" href="{{ route('seo.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">SEO Setting</span>
                     </a>
                 </li>
                 <li>

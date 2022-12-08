@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,12 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
 
   Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
+
+  //Seo Setting
+  Route::get('/seo', [SettingController::class, 'index'])->name('seo.index');
+  
+  Route::post('/seo-update/{id}',[SettingController::class, 'update'])->name('seo.update');
+
 
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
