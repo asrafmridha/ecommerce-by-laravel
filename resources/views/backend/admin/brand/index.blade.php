@@ -1,6 +1,6 @@
 @extends('backend.mastaring.master')
 @section('category','active')
-{{-- @section('breadcrumb')
+@section('breadcrumb')
     <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
     <div class="breadcrumb-wrapper">
         <ol class="breadcrumb">
@@ -8,17 +8,17 @@
                 <a href="{{ route('dashboard') }}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="">Feedback Table </a>
+                <a href="">Brand Table </a>
             </li>
         </ol>
     </div>
-@endsection --}}
+@endsection
 @section('content') 
 
 {{-- Data Filter Start --}}
 <div class="card-body">
     <div class="btn-group"> 
-        <button data-toggle="modal" data-target="#AddsubcategoryModal" class="end btn btn-primary">Add ChildCategory</button>  
+        <button data-toggle="modal" data-target="#AddsubcategoryModal" class="end btn btn-primary">Add Brand</button>  
         <a data-toggle="modal" data-target="#feedbackcsvModal" class="end btn btn-success"
             href="">Import</a>
             
@@ -81,7 +81,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Total {{ ucfirst("childcategory") }} ({{ $childcategory->count() }})</h4>
+                <h4 class="card-title">Total {{ ucfirst("Brand") }} ({{ $brand->count() }})</h4>
             </div>  
             <div class="table-responsive " >
                 <table class="table table-white " >
@@ -98,14 +98,14 @@
                                             for="colorCheck1"></label>
                                 </div> 
                             </th>
-                            <th>ChildCategory Name</th>
-                            <th>Category Name</th>
-                            <th>Subcategory Name</th>
+                            <th>Brand Name</th>
+                            <th>Brand Slug</th>
+                            <th>Brand Logo</th>
                             <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                                  @foreach ( $childcategory as $childcategory) 
+                                  @foreach ( $brand as $brand) 
                                 <tr>
                                     <td>
                                         <div class="custom-control custom-control-primary custom-checkbox">
@@ -115,10 +115,10 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
-                                    <td>{{ $childcategory->childcategory_name }}</td>
-                                    <td>{{ $childcategory->category->category_name }}</td>
+                                    <td>{{ $brand->brand_name }}</td>
+                                    <td>{{ $brand->brand_slug }}</td>
 
-                                     <td>{{ $childcategory->sub_category->sub_category_name }}</td>
+                                     <td><img height="120px" width="150px" src="{{ asset('uploads/brand/'.$brand->brand_logo) }}" alt=""></td>
                                             
                                         <td>
                                             <div class="dropdown">
@@ -126,11 +126,11 @@
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <a href="{{ route('childcategory.edit',$childcategory->id) }}" class="btn ">
+                                                    <button data-target="#updatebrandModal__{{ $brand->id }}" data-toggle="modal"  class="btn ">
                                                             <i data-feather="edit-2" class="mr-50"></i>
                                                             <span>Edit</span>
-                                                                                                                                        </a>
-                                                    <button data-target="#delete_subcategory__{{ $childcategory->id }}" data-toggle="modal" type="submit" class=" dropdown-item" href="javascript:void(0);">
+                                                                                                                                        </button>
+                                                    <button data-target="#delete_subcategory__{{ $brand->id }}" data-toggle="modal" type="submit" class=" dropdown-item" href="javascript:void(0);">
                                                         <i data-feather="trash" class="mr-50"></i>
                                                         <span>Delete</span>
                                                     </button>
@@ -140,7 +140,7 @@
                                 </tr>
 
                                     {{-- Modal for subcategory  delete  --}}
-                                    <div class="modal fade" id="delete_subcategory__{{ $childcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="delete_subcategory__{{ $brand->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -150,10 +150,10 @@
                                                                 </button>
                                                 </div> 
                                                 <div class="modal-body text-white bg-dark">
-                                                    <form action="{{ route('childcategory.destroy',$childcategory->id) }}" method="POST">
+                                                    <form action="{{ route('brand.destroy',$brand->id) }}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                            Are you sure want to delete this ChildCategory?
+                                                            Are you sure want to delete this Brand?
                                                     
                                                         <div class="modal-footer">
                                                                     <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
@@ -166,23 +166,40 @@
                                     </div>      
                                     
                                     {{-- Modal For   Update subcategory   --}}
-                                    {{-- <div class="modal fade" id="updatesubcategoryModal__{{ $childcategory->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="updatebrandModal__{{ $brand->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Update subcategory</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Update Brand</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <form action="{{ route('childcategory.update',$childcategory->id) }}" method="POST">
+                                                    <form action="{{ route('brand.update',$brand->id) }}" method="POST" enctype="multipart/form-data">
                                                         @method('PUT')
                                                     @csrf
 
-                                                    @php
-                                                         $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
-                                                    @endphp
+                                                     <label for="brand_name">Enter  Update Brand Name</label>
+                                                    <input type="text" name="brand_name" class="mt-1 form-control import" value="{{ $brand->brand_name }}" >
+                                                        @error('brand_name')
+                                                        <div class="alert alert-danger">
+                                                            {{$message}}
+                                                        </div>  
+                                                        @enderror 
+
+                                                        <label for="brand_logo">Old Image</label> <br>
+
+                                                        <img class="mt-1" height="150px" width="150px" src="{{ asset('uploads/brand/'.$brand->brand_logo) }}" alt=""> <br> <br>
+
+                                                        <label for="brand_logo">Brand Logo</label>
+
+                                                        <input type="file" name="brand_logo" class="form-control import" >
+                                                        @error('brand_logo')
+                                                        <div class="alert alert-danger">
+                                                            {{$message}}
+                                                        </div>  
+                                                        @enderror
                                                   
                                                        
  
@@ -194,17 +211,17 @@
                                                     </form>
                                             </div>
                                         </div>
-                                    </div>  --}}
+                                    </div> 
                                     
                     @endforeach
                                
                             </tbody>
                         </table>
-                        {{-- {{ $childcategory->links() }} --}}
+                        {{-- {{ $brand->links() }} --}}
 
-                        {{-- {{ $childcategory->links() }} --}}
+                        {{-- {{ $brand->links() }} --}}
                         
-                        {{-- {{ $childcategory->links('vendor.pagination.custom') }} --}}
+                        {{-- {{ $brand->links('vendor.pagination.custom') }} --}}
                                         
                 </div>
         </div>
@@ -249,31 +266,20 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('childcategory.store') }}" method="POST">
+                <form action="{{ route('brand.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <label for="subcategory_name">Category/SubCategory Name</label>
-                    <select class="form-control" aria-label="Default select example" name="subcategory_id">
-
-                        @foreach ($category as $category)
-                            @php
-                                
-                                $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
-                            
-                            @endphp 
-                                <option>{{ $category->category_name }}</option>
-                        
-                       
-                            @foreach ($subcategory as $subcat)
-                            <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
-
-                            @endforeach
-                        @endforeach
-
-                    </select>
-
-                    <label for="sub_category_name">Enter ChildCategory Name</label>
-                    <input type="text" name="child_category_name" class="form-control import" >
+                    <label for="subcategory_name">Brand Name</label>
+                    <input type="text" name="brand_name" class="form-control import" >
                     @error('sub_category_name')
+                    <div class="alert alert-danger">
+                        {{$message}}
+                    </div>  
+                    @enderror
+                   
+
+                    <label for="brand_logo">Brand Logo</label>
+                    <input type="file" name="brand_logo" class="form-control import" >
+                    @error('brand_logo')
                     <div class="alert alert-danger">
                         {{$message}}
                     </div>  

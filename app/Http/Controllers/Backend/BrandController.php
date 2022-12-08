@@ -94,7 +94,6 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $request->validate([
             'brand_name' => 'required',
             // 'brand_logo' => 'image',
@@ -102,6 +101,7 @@ class BrandController extends Controller
 
 
         $brand = Brand::find($id);
+        $image = $request->brand_logo;
 
         if ($image = $request->brand_logo) {
             // $image = $request->file('brand_logo');

@@ -27,7 +27,7 @@ class ChildCategoryController extends Controller
     public function index()
     {
 
-        $childcategory = ChildCategory::all();
+        $childcategory = ChildCategory::paginate(5);
 
         $category = Category::all();
 
@@ -109,13 +109,13 @@ class ChildCategoryController extends Controller
     {
         $childcategory = ChildCategory::find($id);
 
-        // $catId = SubCategory::where('id', $request->subcategory_id)->first();
+        //$catId = SubCategory::where('id', $request->subcategory_id)->first();
         $catId = DB::table('sub_categories')->where('id', $request->subcategory_id)->first();
 
         $childcategory->category_id = $catId->category_id;
         $childcategory->subcategory_id = $request->subcategory_id;
         $childcategory->childcategory_name = $request->child_category_name;
-        $childcategory->childcategory_slug = Str::slug($request->child_category_name, '-');
+        // $childcategory->childcategory_slug = Str::slug($request->child_category_name, '-');
 
         $childcategory->update();
 

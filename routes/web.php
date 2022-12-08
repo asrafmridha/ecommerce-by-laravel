@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
@@ -53,13 +54,13 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   //ChildCategory Routes
   Route::resource('childcategory', ChildCategoryController::class);
+  //Brand route 
+  Route::resource('brand', BrandController::class);
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
 
   Route::get('theme-toggle', [ThemeSettingController::class, 'toggle'])->name('theme.toggle');
-
-
 
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
