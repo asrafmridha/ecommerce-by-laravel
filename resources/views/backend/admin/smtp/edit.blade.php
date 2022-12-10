@@ -19,7 +19,7 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            <form action="{{ route('seo.update',$smtp->id) }}" method="POST">
+            <form action="{{ route('smtp.update',$smtp->id) }}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-header">

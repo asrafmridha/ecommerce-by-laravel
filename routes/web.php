@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
+use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
@@ -65,8 +66,13 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   //Seo Setting
   Route::get('/seo', [SettingController::class, 'index'])->name('seo.index');
-  
-  Route::post('/seo-update/{id}',[SettingController::class, 'update'])->name('seo.update');
+
+  Route::post('/seo-update/{id}', [SettingController::class, 'update'])->name('seo.update');
+
+
+  Route::get('/smtp', [SmtpController::class, 'index'])->name('smtp.index');
+  Route::post('/smtp/{id}', [SmtpController::class, 'update'])->name('smtp.update');
+
 
 
   //Profile Section
