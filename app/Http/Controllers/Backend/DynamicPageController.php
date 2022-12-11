@@ -37,4 +37,10 @@ class DynamicPageController extends Controller
         $page->save();
         return back()->withSuccess('Page Create Successfully');
     }
+
+    public function destroy($id)
+    {
+        DynamicPage::find($id)->delete();
+        return back()->withSuccess("Delete Page Successfully");
+    }
 }
