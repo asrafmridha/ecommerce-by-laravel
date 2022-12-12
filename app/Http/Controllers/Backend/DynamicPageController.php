@@ -28,6 +28,7 @@ class DynamicPageController extends Controller
 
     public function store(Request $request)
     {
+    
         $page = new DynamicPage();
         $page->page_position = $request->page_position;
         $page->page_name = $request->page_name;
@@ -42,5 +43,11 @@ class DynamicPageController extends Controller
     {
         DynamicPage::find($id)->delete();
         return back()->withSuccess("Delete Page Successfully");
+    }
+
+    public function update(Request $request, $id)
+    {
+        DynamicPage::find($id)->update($request->except('_token'));
+        return back()->withSuccess("Update Page Successfully");
     }
 }
