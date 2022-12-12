@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\DynamicPageController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
@@ -69,9 +70,19 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   Route::post('/seo-update/{id}', [SettingController::class, 'update'])->name('seo.update');
 
-
+  // Smtp  
   Route::get('/smtp', [SmtpController::class, 'index'])->name('smtp.index');
   Route::post('/smtp/{id}', [SmtpController::class, 'update'])->name('smtp.update');
+
+  //Dynamic Page
+
+  Route::get('/pages', [DynamicPageController::class, 'index'])->name('page.index');
+
+  Route::get('/pages/create', [DynamicPageController::class, 'create'])->name('page.create');
+
+  Route::post('/pages/store', [DynamicPageController::class, 'store'])->name('page.store');
+  Route::delete('/pages/destroy/{id}', [DynamicPageController::class, 'destroy'])->name('page.destroy');
+
 
 
 

@@ -114,8 +114,8 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
-                                    <td>{{ $page->category_name }}</td>
-                                    <td>{{ $page->category_slug }}</td>
+                                    <td>{{ $page->page_name }}</td>
+                                    <td>{{ $page->page_title }}</td>
                                             
                                         <td>
                                             <div class="dropdown">
@@ -147,10 +147,10 @@
                                                                 </button>
                                                 </div> 
                                                 <div class="modal-body text-white bg-dark">
-                                                    <form action="{{ route('category.destroy',$page->id) }}" method="POST">
+                                                    <form action="{{ route('page.destroy',$page->id) }}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                            Are you sure want to delete this Category?
+                                                            Are you sure want to delete this Page?
                                                     
                                                         <div class="modal-footer">
                                                                     <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>
