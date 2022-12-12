@@ -28,7 +28,14 @@ class DynamicPageController extends Controller
 
     public function store(Request $request)
     {
-    
+        $request->validate([
+            'page_position'    => 'required',
+            'page_name'        => 'required',
+            'page_title'       => 'required',
+            'page_description' => 'required',
+
+        ]);
+
         $page = new DynamicPage();
         $page->page_position = $request->page_position;
         $page->page_name = $request->page_name;
