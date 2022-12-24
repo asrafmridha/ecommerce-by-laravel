@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
         $category = Category::paginate(5);
@@ -100,7 +100,7 @@ class CategoryController extends Controller
 
         // Query Builder 
         // DB::table('categories')->where('id', $id)->delete();
-        
+
         //eloquent 
         Category::find($id)->delete();
         return back()->withSuccess('Category Delete Successfully');
@@ -108,7 +108,9 @@ class CategoryController extends Controller
 
     public function CategoryMassDelete(Request $request)
     {
-        // dd($request->ids);
+        return response()->json([
+            'ids' => $request->ids,
+        ]);
         $category = Category::findMany($request->ids);
         $category->each->delete();
         return response()->json(['success' => 'Successfully Delete']);

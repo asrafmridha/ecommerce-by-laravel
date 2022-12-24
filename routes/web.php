@@ -83,6 +83,8 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::post('/pages/store', [DynamicPageController::class, 'store'])->name('page.store');
   Route::delete('/pages/destroy/{id}', [DynamicPageController::class, 'destroy'])->name('page.destroy');
 
+  Route::post('/pages/update/{id}', [DynamicPageController::class, 'update'])->name('page.update');
+
 
 
 

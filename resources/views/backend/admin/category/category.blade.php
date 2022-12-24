@@ -219,7 +219,7 @@
                 <h1 class="text-danger">Are your sure?</h1>
                 <p>You want to delete this</p>
             </div>
-            <a id="mass_delete" class="btn btn-danger">DELETE</a>
+            <button id="mass_delete" class="btn btn-danger">DELETE</button>
         
         </div>
     </div>
@@ -234,7 +234,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModa
+                lLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -287,8 +288,10 @@
                     $('.select_item').prop('checked', false);
                     $('#all_action').addClass('d-none');
                 }
-                $(document).on('click', '#mass_delete', function(){
+                // $(document).on('click', '#mass_delete', function(){
+                    // console.log(1);
                 $('#mass_delete').click(function() {
+
                     $.ajax({
                         type: 'get',
                         url: "{{ route('category.bulkDelete') }}",
@@ -304,7 +307,7 @@
                         }
                     })
                 });
-            });
+            // });
             //individual select feature
             $('.select_item').change(function() {
                 ids = []
@@ -320,7 +323,9 @@
                     $('#all_action').removeClass('d-none');
                     $('#export_id').val(ids);
                 }
-                $(document).on('click', '#mass_delete', function(e) {
+                // $(document).on('click', '#mass_delete', function(e) {
+                $('#mass_delete').click(function() {
+                    console.log(2);
                     $.ajax({
                         type: 'get',
                         url: "{{ route('category.bulkDelete') }}",

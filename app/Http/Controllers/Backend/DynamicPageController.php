@@ -54,6 +54,13 @@ class DynamicPageController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'page_position'    => 'required',
+            'page_name'        => 'required',
+            'page_title'       => 'required',
+            'page_description' => 'required',
+
+        ]);
         DynamicPage::find($id)->update($request->except('_token'));
         return back()->withSuccess("Update Page Successfully");
     }
