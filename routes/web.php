@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
+use App\Http\Controllers\Backend\WarehouseController;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::resource('childcategory', ChildCategoryController::class);
   //Brand route 
   Route::resource('brand', BrandController::class);
+
+  //  Warehouse Route 
+  Route::resource('warehouse', WarehouseController::class);
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
