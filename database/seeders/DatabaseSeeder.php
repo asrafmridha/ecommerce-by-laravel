@@ -24,6 +24,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
 
             SeoSeeder::class,
+            CategorySeeder::class,
+            SettingSeeder::class,
+            SmtpSeeder::class,
+
 
 
         ]);

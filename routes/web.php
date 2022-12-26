@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
+use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\DynamicPageController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
@@ -63,6 +64,10 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   //  Warehouse Route 
   Route::resource('warehouse', WarehouseController::class);
+
+  //Cupon Route
+
+  Route::resource('cupon', CuponController::class);
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');

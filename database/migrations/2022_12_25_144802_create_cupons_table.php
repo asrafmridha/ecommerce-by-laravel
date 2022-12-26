@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('valid_date')->nullable();
             $table->string('type')->nullable();
             $table->string('cupon_amount')->nullable();
-            $table->string('status')->nullable();
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }
