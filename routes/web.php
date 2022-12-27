@@ -6,11 +6,13 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\DynamicPageController;
+use App\Http\Controllers\Backend\PickupController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
+use App\Models\Pickuppoint;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
 
@@ -66,8 +68,11 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::resource('warehouse', WarehouseController::class);
 
   //Cupon Route
-
   Route::resource('cupon', CuponController::class);
+
+  // Pickpoint Route 
+
+  Route::resource('pickuppoint', PickupController::class);
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
