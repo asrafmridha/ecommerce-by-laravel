@@ -34,9 +34,7 @@
                                     @foreach ($subcategory as $subcat)
                                         <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
                                     @endforeach
-                                @endforeach
-                                
-                                
+                                @endforeach   
                             </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
@@ -48,8 +46,10 @@
                         <div class="col-12 mt-2">
                             <label class="h5" for="pickup_point_address">Brand</label>
                             <select name="" id="" class="form-control">
-                                <option value="">gfd</option>
-                                <option value="">dgfdfg</option>
+                                @foreach ($brand as $brand)
+                                     <option value="">{{ $brand->brand_name }}</option>
+                                @endforeach
+                                 
                             </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
@@ -98,8 +98,10 @@
                         <div class="col-12 mt-2">
                             <label class="h5" for="pickup_point_address">Warehouse</label>
                             <select name="" id="" class="form-control">
-                                <option value="">gfd</option>
-                                <option value="">dgfdfg</option>
+                                @foreach ($warehouse as $warehouse)
+                                    <option value="">{{ $warehouse->warehouse_name }}</option>
+                                @endforeach
+                               
                             </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
@@ -147,12 +149,17 @@
                         </div>
                         <div class="col-12 mt-2">
                               <label class="h5" for="pickup_point_address">Pickup Point*</label>
-                                <input type="text" name="pickup_point_address" class=" form-control import">
+                                <select name="" id="" class="form-control">
+                                    @foreach ($pickuppoint as $pickuppoint)
+                                        <option value="">{{ $pickuppoint->pickup_point_name }}</option>
+                                    @endforeach
+                                </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
                                             {{$message}}
                                         </div>  
                                     @enderror
+                                
                         </div>
                         <div class="col-8 mt-2">
                               <label class="h5" for="pickup_point_address">Tags*</label>
