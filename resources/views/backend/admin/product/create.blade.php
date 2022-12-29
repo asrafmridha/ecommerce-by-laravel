@@ -24,8 +24,19 @@
                         <div class="col-12 mt-1">
                             <label class="h5" for="pickup_point_address">Enter Category/Subcategory</label>
                             <select name="" id="" class="form-control">
-                                <option value="">gfd</option>
-                                <option value="">dgfdfg</option>
+                                <option disabled value="">===Select Item==</option> <br>
+                                @foreach ($category as $category)
+                                    @php   
+                                        $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
+                                    @endphp 
+                                    <option disabled value=""><span class="text-white">Category::</span>{{ $category->category_name }}</option>
+
+                                    @foreach ($subcategory as $subcat)
+                                        <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
+                                    @endforeach
+                                @endforeach
+                                
+                                
                             </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
@@ -224,8 +235,8 @@
                                 </div>
                                 @error('room_photo')
                                     <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                @enderror
+                        </div>
                     </div>
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="customSwitches">
