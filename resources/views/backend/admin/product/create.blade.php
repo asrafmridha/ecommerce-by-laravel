@@ -23,7 +23,7 @@
 
                         <div class="col-12 mt-1">
                             <label class="h5" for="pickup_point_address">Enter Category/Subcategory</label>
-                            <select name="" id="" class="form-control">
+                            <select name="" id="category_id" class="form-control">
                                 <option disabled value="">===Select Item==</option> <br>
                                 @foreach ($category as $category)
                                     @php   
@@ -140,7 +140,9 @@
                         </div>
                         <div class="col-12 mt-2">
                               <label class="h5" for="pickup_point_address">Child Category*</label>
-                                <input type="text" name="pickup_point_address" class=" form-control import">
+                                 <select name="" id="childcategory_id" class="form-control">
+                                   
+                                </select>
                                     @error('pickup_point_address')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -256,9 +258,37 @@
     </div>
     <!--/ Statistics Card -->
 </div>
-
-
-
 @endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            
+        
+            // $('#category_id').on('change',function(){
+            //     var category_id=$(this).val();
+            //     alert(category_id);
+               
+            // })
+           $('#category_id').change(function (e) { 
+                e.preventDefault();
+                var subcategory_id=$(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('bbc') }}"+'/'+subcategory_id,
+                    dataType: "JSON",
+                    success: function (response) {
+                        $.each(response.data, function (key, data) { 
+                             $('#childcategory_id').append('<option value="">'+data.childcategory_name+'</option>');
+                             
+                        });
+                        
+                    }
+                });
+                
+            });
+        });
+
+    </script>
+ @endsection
     
 
