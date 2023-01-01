@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SpecialOfferController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -7,11 +8,13 @@ use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\DynamicPageController;
 use App\Http\Controllers\Backend\PickupController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
+use App\Models\ChildCategory;
 use App\Models\Pickuppoint;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +76,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   // Pickpoint Route 
 
   Route::resource('pickuppoint', PickupController::class);
+  //Product Route 
+
+  Route::resource('product', ProductController::class);
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
@@ -88,6 +94,10 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::get('/smtp', [SmtpController::class, 'index'])->name('smtp.index');
   Route::post('/smtp/{id}', [SmtpController::class, 'update'])->name('smtp.update');
 
+  // Global Route 
+  Route::get('/bbb/{id?}', [ChildCategoryController::class, 'Getchildcategory'])->name('bbc');
+
+
   //Dynamic Page
 
   Route::get('/pages', [DynamicPageController::class, 'index'])->name('page.index');
@@ -98,9 +108,6 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::delete('/pages/destroy/{id}', [DynamicPageController::class, 'destroy'])->name('page.destroy');
 
   Route::post('/pages/update/{id}', [DynamicPageController::class, 'update'])->name('page.update');
-
-
-
 
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');

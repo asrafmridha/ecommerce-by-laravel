@@ -134,4 +134,15 @@ class ChildCategoryController extends Controller
         ChildCategory::find($id)->delete();
         return back()->withSuccess('Deleted ChildCategory Successfully');
     }
+
+    public function Getchildcategory($id)
+    {
+        $data = ChildCategory::where('subcategory_id', $id)->get();
+
+
+        return response()->json([
+
+            'data' => $data,
+        ]);
+    }
 }
