@@ -255,10 +255,8 @@
                     <select class="form-control" aria-label="Default select example" name="subcategory_id">
 
                         @foreach ($category as $category)
-                            @php
-                                
+                            @php   
                                 $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
-                            
                             @endphp 
                                 <option>{{ $category->category_name }}</option>
                         

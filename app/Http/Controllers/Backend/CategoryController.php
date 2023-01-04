@@ -115,4 +115,6 @@ class CategoryController extends Controller
         $category->each->delete();
         return response()->json(['success' => 'Successfully Delete']);
     }
+
+   
 }

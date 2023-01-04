@@ -19,10 +19,13 @@ return new class extends Migration
             $table->unsignedBigInteger('subcategory_id');
             $table->integer('childcategory_id')->nullable();
             $table->integer('brand_id')->nullable();
+            $table->integer('pickup_point_id')->nullable();
             $table->string('name')->nullable();
             $table->string('code')->nullable();
             $table->string('unit')->nullable();
             $table->string('tags')->nullable();
+            $table->string('color')->nullable();
+            $table->string('size')->nullable();
             $table->string('purchase_price')->nullable();
             $table->string('selling_price')->nullable();
             $table->string('discount_price')->nullable();

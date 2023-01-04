@@ -95,7 +95,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::post('/smtp/{id}', [SmtpController::class, 'update'])->name('smtp.update');
 
   // Global Route 
-  Route::get('/bbb/{id?}', [ChildCategoryController::class, 'Getchildcategory'])->name('bbc');
+  Route::get('/childcategory/join/{id?}', [ChildCategoryController::class, 'Getchildcategory'])->name('childcategory-join');
 
 
   //Dynamic Page

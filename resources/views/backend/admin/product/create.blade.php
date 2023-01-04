@@ -12,9 +12,9 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="col-12">
-                            <label class="h5" for="pickup_point_address">Enter Product Name</label>
-                            <input type="text" name="pickup_point_address" class=" form-control import">
-                                    @error('pickup_point_address')
+                            <label class="h5" for="name">Enter Product Name</label>
+                            <input type="text" name="name" class=" form-control import">
+                                    @error('name')
                                         <div class="alert alert-danger">
                                             {{$message}}
                                         </div>  
@@ -274,7 +274,7 @@
                 var subcategory_id=$(this).val();
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('bbc') }}"+'/'+subcategory_id,
+                    url: "{{ route('childcategory-join') }}"+'/'+subcategory_id,
                     dataType: "JSON",
                     success: function (response) {
                         $.each(response.data, function (key, data) { 
