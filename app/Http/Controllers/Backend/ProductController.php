@@ -47,7 +47,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name'          => 'required|max:55',
+            'code'          => 'required|unique:products|max:55',
+            'subcategory_id' => 'required',
+            'brand_id'      => 'required',
+            'unit'          => 'required',
+            'purchase_price' => 'required',
+            'selling_price' => 'required',
+            'warehouse'     => 'required',
+            'color'         => 'required',
+            'pickup_point_id' => 'required',
+            'tags'           => 'required',
+            'discount_price' => 'required',
+            'stock_quantity' => 'required',
+            'size' => 'required',
+            'short_description' => 'required',
+            'thumbnails'        => 'required|image',
+            'images'        => 'required|image',
+        ]);
+        dd($request->all());
     }
 
     /**
