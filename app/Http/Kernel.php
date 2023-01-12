@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         // My middleware 
 
         'is_admin' => \App\Http\Middleware\IsAdmin::class,
+        'localization' => \App\Http\Middleware\Localization::class,
     ];
 }
