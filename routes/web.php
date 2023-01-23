@@ -65,7 +65,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::resource('category', CategoryController::class);
 
   //Category Mass Delete
-  Route::get('category/mass/delete', [CategoryController::class, 'CategoryMassDelete'])->name('category.bulkDelete');
+  Route::post('category/mass/delete', [CategoryController::class, 'CategoryMassDelete'])->name('category.bulkDelete');
 
   //SubCategory Routes
   Route::resource('subcategory', SubCategoryController::class);

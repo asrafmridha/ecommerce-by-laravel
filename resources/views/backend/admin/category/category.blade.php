@@ -108,8 +108,8 @@
                                 <tr>
                                     <td>
                                         <div class="custom-control custom-control-primary custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input select_item"
-                                            id="service_select_">
+                                        <input type="checkbox"  class="custom-control-input select_item"
+                                            id="multi-select-{{ $category->id }}">
                                         <label class="custom-control-label text-white"
                                             for="service_select_"></label>
                                         </div>
@@ -278,7 +278,7 @@
                 if ($(this).is(":checked")) {
                     $('.select_item').prop('checked', true);
                     $('.select_item').each(function() {
-                        ids.push($(this).attr('id').split('_')[2]);
+                        ids.push($(this).attr('id').split('-')[2]);
                     });
                     if (ids.length == 0) {
                         $('#all_action').addClass('d-none');
@@ -293,14 +293,15 @@
                 // $(document).on('click', '#mass_delete', function(){
                     // console.log(1);
                 $('#mass_delete').click(function() {
-
+                   
                     $.ajax({
-                        type: 'get',
+                        type: 'POST',
                         url: "{{ route('category.bulkDelete') }}",
                         data: {
                             'ids': ids
                         },
                         success: function(response) {
+                            
                             if (response.success) {
                                 toastr.success(response.success);
                                 $('#all_action').addClass('d-none');
@@ -327,7 +328,6 @@
                 }
                 // $(document).on('click', '#mass_delete', function(e) {
                 $('#mass_delete').click(function() {
-                    console.log(2);
                     $.ajax({
                         type: 'get',
                         url: "{{ route('category.bulkDelete') }}",
