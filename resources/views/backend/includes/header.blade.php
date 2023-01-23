@@ -32,9 +32,21 @@
             </ul>
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
-            <li class="nav-item dropdown dropdown-language"><a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="javascript:void(0);" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="javascript:void(0);" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="javascript:void(0);" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a><a class="dropdown-item" href="javascript:void(0);" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></div>
-            </li>
+
+                @php
+                    $locale = \App::getLocale();
+                @endphp
+                <li class="nav-item dropdown dropdown-language">
+                    @if ($locale == "fr")
+                        <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-fr"></i><span class="selected-language">French</span></a>
+                    @else
+                        <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
+                    @endif
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">
+                        <a class="dropdown-item" href="{{ route('locale', 'en') }}" data-language="en"><i class="flag-icon flag-icon-us"></i> English<a>
+                        <a class="dropdown-item" href="{{ route('locale', 'fr') }}" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a>
+                    </div>
+                </li>
             <li class="nav-item d-none d-lg-block">
                 <a id="dark" class="nav-link nav-link-style">
                     @if(themesetting(Auth::id()) == null)

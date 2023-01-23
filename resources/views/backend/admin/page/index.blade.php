@@ -282,10 +282,6 @@
     </div>
 </div> 
 
-
-{{-- End mass delete modal --}}
-
-@endsection
 {{-- Modal For add  Add Category   --}}
 <div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -343,6 +339,12 @@
         </div>
     </div>
 </div> 
+
+
+{{-- End mass delete modal --}}
+
+@endsection
+
 
 
 

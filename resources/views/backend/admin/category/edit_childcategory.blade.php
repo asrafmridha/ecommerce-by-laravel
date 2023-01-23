@@ -2,8 +2,6 @@
 @section('category','active')
 
 @section('content')
- 
-
         <form action="{{ route('childcategory.update',$childcategory->id) }}" method="POST">
             @method('PUT')
                 @csrf
@@ -42,4 +40,4 @@
                             <button type="submit" class="btn btn-primary mr-1">{{ __('Update') }}</button>
                         </div>
         </form>
-                @endsection
+@endsection

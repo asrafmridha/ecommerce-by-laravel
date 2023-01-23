@@ -18,6 +18,7 @@ use App\Models\ChildCategory;
 use App\Models\Pickuppoint;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,13 @@ Route::get('/', function () {
 // });
 
 //   For Admin or user check
+
+// for localization 
+
+Route::get('locale/{locale}', function ($locale) {
+  Session::put('locale', $locale);
+  return back();
+})->name('locale');
 
 Route::get('/dashboard', function () {
   return view('backend.admin.home');

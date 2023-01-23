@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\Localization::class,
 
         ],
 
@@ -68,6 +69,6 @@ class Kernel extends HttpKernel
         // My middleware 
 
         'is_admin' => \App\Http\Middleware\IsAdmin::class,
-        'localization' => \App\Http\Middleware\Localization::class,
+
     ];
 }

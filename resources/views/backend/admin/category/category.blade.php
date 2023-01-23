@@ -1,6 +1,6 @@
 @extends('backend.mastaring.master')
 @section('category','active')
-{{-- @section('breadcrumb')
+@section('breadcrumb')
     <h2 class="content-header-title float-left mb-0">Admin Dashboard</h2>
     <div class="breadcrumb-wrapper">
         <ol class="breadcrumb">
@@ -8,11 +8,11 @@
                 <a href="{{ route('dashboard') }}">Home</a>
             </li>
             <li class="breadcrumb-item">
-                <a href="">Feedback Table </a>
+                <a href="">Category Table </a>
             </li>
         </ol>
     </div>
-@endsection --}}
+@endsection
 @section('content') 
 
 {{-- Data Filter Start --}}
@@ -228,7 +228,7 @@
 
 {{-- End mass delete modal --}}
 
-@endsection
+
 {{-- Modal For add  Add Category   --}}
 <div class="modal fade" id="AddCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -259,6 +259,8 @@
         </div>
     </div>
 </div> 
+
+@endsection
 
 
 

@@ -48,6 +48,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
+        $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
+        dd($subcategory);
         $request->validate([
             'name'          => 'required|max:55',
             'code'          => 'required|unique:products|max:55',
@@ -67,7 +69,24 @@ class ProductController extends Controller
             'thumbnails'        => 'required|image',
             'images'        => 'required|image',
         ]);
-        dd($request->all());
+
+        //For get Category id
+        $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
+        $product = new Product;
+        $product->category_id = $subcategory->category_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
+        $product->subcategory_id = $request->subcategory_id;
     }
 
     /**
