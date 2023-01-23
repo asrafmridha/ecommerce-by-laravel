@@ -110,8 +110,7 @@
                                         <div class="custom-control custom-control-primary custom-checkbox">
                                         <input type="checkbox"  class="custom-control-input select_item"
                                             id="multi-select-{{ $category->id }}">
-                                        <label class="custom-control-label text-white"
-                                            for="service_select_"></label>
+                                        <label class="custom-control-label text-white" for="multi-select-{{ $category->id }}"></label>
                                         </div>
                                     </td>
                                     <td>{{ $category->category_name }}</td>
@@ -293,7 +292,6 @@
                 // $(document).on('click', '#mass_delete', function(){
                     // console.log(1);
                 $('#mass_delete').click(function() {
-                   
                     $.ajax({
                         type: 'POST',
                         url: "{{ route('category.bulkDelete') }}",
@@ -310,13 +308,13 @@
                         }
                     })
                 });
-            // });
+
             //individual select feature
             $('.select_item').change(function() {
                 ids = []
                 $('.select_item').each(function() {
                     if ($(this).is(":checked")) {
-                        ids.push($(this).attr('id').split('_')[2]);
+                        ids.push($(this).attr('id').split('-')[2]);
                     }
                 });
                 if (ids.length == 0) {
