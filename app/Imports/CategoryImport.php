@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Category;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Illuminate\Support\Str;
 
 class CategoryImport implements ToModel, WithHeadingRow
 {
@@ -17,6 +18,7 @@ class CategoryImport implements ToModel, WithHeadingRow
     {
         return new Category([
             'category_name' => $row['category_name'],
+            'category_slug' => Str::slug($row['category_name']),
         ]);
     }
 }
