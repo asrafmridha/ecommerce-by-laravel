@@ -19,7 +19,7 @@
 <div class="card-body">
     <div class="btn-group"> 
         <button data-toggle="modal" data-target="#AddCategoryModal" class="end btn btn-primary">Add Category</button>  
-        <a data-toggle="modal" data-target="#feedbackcsvModal" class="end btn btn-success"
+        <a data-toggle="modal" data-target="#exampleModalCenter" class="end btn btn-success"
             href="">Import</a>
             
         <button id="all_action"
@@ -30,14 +30,14 @@
         </button>
         <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
             <button data-toggle="modal" data-target="#mass_delete_modal"  class="dropdown-item">Mass Delete</button>
-
-            <form action="">
-                <input type="hidden" name="id" id="export_id">
-                <button type="submit" class=" dropdown-item">Mass Export</button>
+            <form action="{{ route('category.export') }}" method="POST">
+                @csrf
+                <input type="hidden" id="export_all" name="id">
+                <button type="submit" class="dropdown-item"><i data-feather='external-link'></i> Export</button>
             </form>
         </div>
     </div>
-    <form action="" method="GET">
+    <form action="{{ route('category.dateFilter') }}" method="GET">
         <div class="row align-items-end">
             <div class="col-md">
                 <div class="form-group">
@@ -51,12 +51,14 @@
                     <input type="date" @isset(request()->start_date) value="{{ \Carbon\Carbon::parse(request()->end_date)->format('Y-m-d') }}" @endisset name="end_date" id="end_date" class="form-control flatpickr-human-friendly" placeholder="dd/mm/yyyy">
                 </div>
             </div>
+            
              <div class="col-md-auto">
                 <div class="form-group">
                     <button type="submit" class="btn btn-success waves-effect w-100 w-sm-auto">Filter</button>
                 </div>
             </div>
         </div>
+    </form>
          <div class="row align-items-md-center">
             <div class="col-md">
                 <div class="form-group mb-md-0">
@@ -71,7 +73,6 @@
                 </div>
             </div>
         </div> 
-    </form>
 </div>
 
 
@@ -255,6 +256,36 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
                 </form>
+        </div>
+    </div>
+</div> 
+
+ {{-- Modal for Import Category  --}}
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Impor Csv Or Excel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('category-import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="file" name="file" class="mt-3 form-control import" >
+                    @error('file')
+                    <div class="alert alert-danger">
+                        {{$message}}
+                    </div>  
+                    @enderror
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+            </form>
         </div>
     </div>
 </div> 

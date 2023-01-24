@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Imports\CategoryImport;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CategoryController extends Controller
 {
@@ -108,13 +110,56 @@ class CategoryController extends Controller
 
     public function CategoryMassDelete(Request $request)
     {
-        return response()->json([
-            'ids' => $request->ids,
-        ]);
         $category = Category::findMany($request->ids);
         $category->each->delete();
         return response()->json(['success' => 'Successfully Delete']);
     }
 
-   
+    // public function category_export(Request $request)
+    // {
+
+    //     $explode = explode(',', $request->id);
+
+    //     $ids = [];
+    //     $header = [];
+    //     $header[] = 'id';
+    //     $header[] = 'name';
+    //     $header[] = 'email';
+    //     $header[] = 'gender';
+    //     $header[] = 'department';
+    //     $header[] = 'designation';
+    //     $header[] = 'birth_day';
+    //     $header[] = 'blood_group';
+    //     $header[] = 'address';
+    //     $header[] = 'phone';
+    //     // $header [] = 'created_by';
+    //     // $header [] = 'updated_by';
+    //     $header[] = 'created_at';
+    //     $header[] = 'updated_at';
+    //     foreach ($explode as $id) {
+    //         array_push($ids, $id);
+    //     }
+    //     return Excel::download(new TeacherExport($ids, $header), 'Teacher.xlsx');
+    // }
+
+    public function category_import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        Excel::import(new CategoryImport(), $request->file('file'));
+
+        return back()->withSuccess('Category Imported');
+    }
+
+    public function categoryDateFilter()
+    {
+        request()->validate([
+            'start_date' => 'required',
+            'end_date'  => 'required',
+        ]);
+        $category = Category::whereBetween('created_at', [request()->start_date, request()->end_date])->paginate(10);
+        return view('backend.admin.category.category', compact('category'));
+    }
 }
