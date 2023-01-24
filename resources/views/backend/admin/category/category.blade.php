@@ -59,6 +59,8 @@
             </div>
         </div>
     </form>
+    <form action="{{ route('category.search') }}" method="GET">
+        @csrf
          <div class="row align-items-md-center">
             <div class="col-md">
                 <div class="form-group mb-md-0">
@@ -73,6 +75,7 @@
                 </div>
             </div>
         </div> 
+    </form>
 </div>
 
 

@@ -153,4 +153,10 @@ class CategoryController extends Controller
         $category = Category::whereBetween('created_at', [request()->start_date, request()->end_date])->paginate(10);
         return view('backend.admin.category.category', compact('category'));
     }
+
+    public function category_search(Request $request)
+    {
+        $category = Category::where('category_name', 'Like', '%' . $request->search . '%')->get();
+        return view('backend.admin.category.category', compact('category'));
+    }
 }

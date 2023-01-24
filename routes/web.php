@@ -71,10 +71,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::post('category/export', [CategoryController::class, 'category_export'])->name('category.export');
 
   Route::get('/categoryDateFilter', [CategoryController::class, 'categoryDateFilter'])->name('category.dateFilter');
-  // Route::get('dfsdsfs', function () {
 
-  //   dd('hlw');
-  // })->name('category.dateFilter');
+  Route::get('/category-search', [CategoryController::class, 'category_search'])->name('category.search');
+
 
   //SubCategory Routes
   Route::resource('subcategory', SubCategoryController::class);
