@@ -314,7 +314,7 @@
                         $('#all_action').addClass('d-none');
                     } else {
                         $('#all_action').removeClass('d-none');
-                        $('#export_id').val(ids);
+                        $('#export_all').val(ids);
                     }
                 } else {
                     $('.select_item').prop('checked', false);
@@ -353,7 +353,7 @@
                     $('.select_all').prop('checked', false);
                 } else {
                     $('#all_action').removeClass('d-none');
-                    $('#export_id').val(ids);
+                    $('#export_all').val(ids);
                 }
                 // $(document).on('click', '#mass_delete', function(e) {
                 $('#mass_delete').click(function() {

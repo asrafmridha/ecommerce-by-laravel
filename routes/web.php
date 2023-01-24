@@ -66,6 +66,15 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   //Category Mass Delete
   Route::post('category/mass/delete', [CategoryController::class, 'CategoryMassDelete'])->name('category.bulkDelete');
+  Route::post('category/import', [CategoryController::class, 'category_import'])->name('category-import');
+
+  Route::post('category/export', [CategoryController::class, 'category_export'])->name('category.export');
+
+  Route::get('/categoryDateFilter', [CategoryController::class, 'categoryDateFilter'])->name('category.dateFilter');
+  // Route::get('dfsdsfs', function () {
+
+  //   dd('hlw');
+  // })->name('category.dateFilter');
 
   //SubCategory Routes
   Route::resource('subcategory', SubCategoryController::class);

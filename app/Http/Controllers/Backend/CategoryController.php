@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\CategoryExport;
 use App\Http\Controllers\Controller;
 use App\Imports\CategoryImport;
 use App\Models\Category;
@@ -115,32 +116,22 @@ class CategoryController extends Controller
         return response()->json(['success' => 'Successfully Delete']);
     }
 
-    // public function category_export(Request $request)
-    // {
+    public function category_export(Request $request)
+    {
 
-    //     $explode = explode(',', $request->id);
+        // The explode() function breaks a string into an array.
+        $explode = explode(',', $request->id);
 
-    //     $ids = [];
-    //     $header = [];
-    //     $header[] = 'id';
-    //     $header[] = 'name';
-    //     $header[] = 'email';
-    //     $header[] = 'gender';
-    //     $header[] = 'department';
-    //     $header[] = 'designation';
-    //     $header[] = 'birth_day';
-    //     $header[] = 'blood_group';
-    //     $header[] = 'address';
-    //     $header[] = 'phone';
-    //     // $header [] = 'created_by';
-    //     // $header [] = 'updated_by';
-    //     $header[] = 'created_at';
-    //     $header[] = 'updated_at';
-    //     foreach ($explode as $id) {
-    //         array_push($ids, $id);
-    //     }
-    //     return Excel::download(new TeacherExport($ids, $header), 'Teacher.xlsx');
-    // }
+        $ids = [];
+        $header = [];
+        $header[] = 'id';
+        $header[] = 'category_name';
+
+        foreach ($explode as $id) {
+            array_push($ids, $id);
+        }
+        return Excel::download(new CategoryExport($ids, $header), 'Category.xlsx');
+    }
 
     public function category_import(Request $request)
     {
