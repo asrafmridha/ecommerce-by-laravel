@@ -49,7 +49,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
 
         $request->validate([
@@ -81,7 +80,7 @@ class ProductController extends Controller
         $product->category_id      = $subcategory->category_id;
         $product->subcategory_id   = $request->subcategory_id;
         $product->childcategory_id = $request->childcategory_id;
-
+        $product->code = $request->code;
         $product->brand_id = $request->brand_id;
         $product->pickup_point_id = $request->pickup_point_id;
         $product->unit   = $request->unit;
@@ -97,9 +96,9 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->video = $request->video;
 
-
-        // $product->featured = $request->featured;
-        // $product->today_deal = $request->today_deal;
+        $product->featured = $request->featured;
+        $product->today_deal = $request->today_deal;
+        $product->status = $request->status;
         // $product->admin_id = Auth::id();
         // $product->date = date('d-m-Y');
 

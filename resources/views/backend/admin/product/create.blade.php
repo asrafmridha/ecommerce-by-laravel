@@ -31,7 +31,7 @@
                                     @php   
                                         $subcategory = DB::table('sub_categories')->where('category_id', $category->id)->get();
                                     @endphp 
-                                    <option disabled value="{{ $category->id }}"><span class="text-white">Category::</span>{{ $category->category_name }}</option>
+                                    <option  value="{{ $category->id }}"><span class="text-white">Category::</span>{{ $category->category_name }}</option>
 
                                     @foreach ($subcategory as $subcat)
                                         <option value="{{ $subcat->id }}">-----  {{ $subcat->sub_category_name }}  ------</option>
@@ -202,7 +202,7 @@
                     <div class="col-12 mt-2">
                         <div class="form-group">
                             <label for="short_description"> {{ __('Short Description') }} <span class="text-danger">*</span> </label>
-                            <textarea name="short_description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ old('short_description') }}</textarea>
+                            <textarea name="description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ old('short_description') }}</textarea>
                                     @error('short_description')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -243,7 +243,7 @@
                                 <div class="custom-file">
                                     <div class="row">
                                         <div class="col-md-10">
-                                            <input type="file" class="custom-file-input" id="more-image" name="images">
+                                            <input type="file" class="custom-file-input" id="more-image" name="images[]">
                                             <label class="custom-file-label" 
                                         for="single_product_image">Choose Image</label>
                                         </div>
@@ -306,13 +306,6 @@
 @section('js')
     <script>
         $(document).ready(function() {
-            
-        
-            // $('#category_id').on('change',function(){
-            //     var category_id=$(this).val();
-            //     alert(category_id);
-               
-            // })
            $('#category_id').change(function (e) { 
                 e.preventDefault();
                 var subcategory_id=$(this).val();
@@ -322,10 +315,9 @@
                     dataType: "JSON",
                     success: function (response) {
                         $.each(response.data, function (key, data) { 
-                             $('#childcategory_id').append('<option value="">'+data.childcategory_name+'</option>');
+                             $('#childcategory_id').append('<option value="'+data.id+'">'+data.childcategory_name+'</option>');
                              
-                        });
-                        
+                        });    
                     }
                 });
                 
@@ -333,15 +325,10 @@
            
             var postUrl= "<?php echo url('add more') ?>";
             var i=1;
-
             $('#more-images').on('click',function(){
-                // alert('hlw');
+
                 i++;
                 $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added " ><td><input type="file" accept="image/*" name="images[]" class="form-control "></td> <button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-                
-
-
-
             });
         });
     </script>
