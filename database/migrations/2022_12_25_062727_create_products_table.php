@@ -34,12 +34,19 @@ return new class extends Migration
             $table->longText('description')->nullable();
             $table->string('thumbnails')->nullable();
             $table->string('images')->nullable();
-            $table->integer('featured')->nullable();
-            $table->integer('today_deal')->nullable();
-            $table->integer('status')->nullable();
+            $table->string('video')->nullable();
+            $table->string('slug')->nullable();
+            $table->string('featured')->nullable();
+            $table->string('today_deal')->nullable();
+            $table->string('status')->nullable();
             $table->integer('flash_deal_id')->nullable();
             $table->integer('cash_on_delivery')->nullable();
             $table->integer('admin_id')->nullable();
+            $table->date('date')->nullable();
+
+
+
+
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->timestamps();
