@@ -10,6 +10,8 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -47,9 +49,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-
+        dd($request->all());
         $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
-        dd($subcategory);
+
         $request->validate([
             'name'          => 'required|max:55',
             'code'          => 'required|unique:products|max:55',
@@ -66,27 +68,65 @@ class ProductController extends Controller
             'stock_quantity' => 'required',
             'size' => 'required',
             'short_description' => 'required',
-            'thumbnails'        => 'required|image',
-            'images'        => 'required|image',
+            // 'thumbnails'        => 'required|image',
+            // 'images'        => 'required|image',
         ]);
 
         //For get Category id
         $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
-        $product = new Product;
-        $product->category_id = $subcategory->category_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
-        $product->subcategory_id = $request->subcategory_id;
+
+        $product = new Product();
+        $product->name             = $request->name;
+        $product->slug             = Str::slug($request->name, '-');
+        $product->category_id      = $subcategory->category_id;
+        $product->subcategory_id   = $request->subcategory_id;
+        $product->childcategory_id = $request->childcategory_id;
+
+        $product->brand_id = $request->brand_id;
+        $product->pickup_point_id = $request->pickup_point_id;
+        $product->unit   = $request->unit;
+        $product->tags = $request->tags;
+        $product->purchase_price = $request->purchase_price;
+        $product->selling_price = $request->selling_price;
+        $product->discount_price = $request->discount_price;
+        $product->warehouse = $request->warehouse;
+        $product->discount_price = $request->discount_price;
+        $product->stock_quantity = $request->stock_quantity;
+        $product->color = $request->color;
+        $product->size = $request->size;
+        $product->description = $request->description;
+        $product->video = $request->video;
+
+
+        // $product->featured = $request->featured;
+        // $product->today_deal = $request->today_deal;
+        // $product->admin_id = Auth::id();
+        // $product->date = date('d-m-Y');
+
+        //Single Image
+        if ($image = $request->thumbnails) {
+            $filename = time() . '.' . $image->extension();
+            $location = public_path('uploads/product/');
+            $image->move($location, $filename);
+            $product->thumbnails = $filename;
+        }
+
+        // Multiple Image
+        $images = array();
+        if ($image = $request->hasFile('images')) {
+
+            foreach ($request->images as $key => $image) {
+
+                $filename = time() . '.' . $image->extension();
+                $location = public_path('uploads/product/');
+                $image->move($location, $filename);
+                array_push($images, $filename);
+            }
+            $product->images = json_encode($images);
+        }
+
+        $product->save();
+        return back()->withSuccess('Product Save Successfully');
     }
 
     /**
