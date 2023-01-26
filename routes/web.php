@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
+use App\Http\Controllers\StatusController;
 use App\Models\ChildCategory;
 use App\Models\Pickuppoint;
 use App\Models\SubCategory;
@@ -73,6 +74,11 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::get('/categoryDateFilter', [CategoryController::class, 'categoryDateFilter'])->name('category.dateFilter');
 
   Route::get('/category-search', [CategoryController::class, 'category_search'])->name('category.search');
+
+  //All Status
+
+  Route::get('featured/status{id}', [StatusController::class, 'featured'])->name('featured.status');
+  Route::get('todaydeal/status{id}', [StatusController::class, 'today_deal'])->name('deal.status');
 
 
   //SubCategory Routes

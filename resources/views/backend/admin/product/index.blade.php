@@ -140,9 +140,9 @@
                                 @endif    
                                 
                                 @if ($product->today_deal=='on')
-                                    <td><a href="" class="btn btn-primary">{{ $product->today_deal }}</a></td>
+                                    <td><a href="{{ route('deal.status',$product->id) }}" class="btn btn-primary">{{ $product->today_deal }}</a></td>
                                 @else
-                                    <td><a href="" class="btn btn-danger">{{ $product->today_deal }}</a></td>
+                                    <td><a href="{{ route('deal.status',$product->id) }}" class="btn btn-danger">{{ $product->today_deal }}</a></td>
                                 @endif 
 
                                 @if ($product->status=='on')
