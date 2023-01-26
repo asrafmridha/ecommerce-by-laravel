@@ -132,10 +132,29 @@
                                     <td>{{ $category->category_name }}</td>
                                     <td>{{ $subcategorie->sub_category_name }}</td>
                                     <td>{{ $brand->brand_name }}</td>
-                                    <td>{{ $product->featured }}</td>
-                                    <td>{{ $product->today_deal }}</td>
-                                    <td>{{ $product->status }}</td>
 
+                                @if ($product->featured=="on")
+                                    <td><a href="" class="btn btn-primary">{{ $product->featured }}</a></td>
+                                @else
+                                    <td><a href="" class="btn btn-danger">{{ $product->featured }}</a></td>
+                                @endif    
+                                
+                                @if ($product->today_deal=='on')
+                                    <td><a href="" class="btn btn-primary">{{ $product->today_deal }}</a></td>
+                                @else
+                                    <td><a href="" class="btn btn-danger">{{ $product->today_deal }}</a></td>
+                                @endif 
+
+                                @if ($product->status=='on')
+                                    <td><a href="" class="btn btn-primary">{{ $product->status }}</a></td>
+                                @else
+                                    <td><a href="" class="btn btn-danger">{{ $product->status }}</a></td>
+                                @endif
+                                
+                               
+                                     
+                                   
+                            
                                      {{-- <td><img height="120px" width="150px" src="{{ asset('uploads/brand/'.$brand->brand_logo) }}" alt=""></td> --}}
                                             
                                         <td>
