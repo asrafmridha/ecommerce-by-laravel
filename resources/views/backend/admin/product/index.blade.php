@@ -134,9 +134,9 @@
                                     <td>{{ $brand->brand_name }}</td>
 
                                 @if ($product->featured=="on")
-                                    <td><a href="" class="btn btn-primary">{{ $product->featured }}</a></td>
+                                    <td><a href="{{ route('featured.status',$product->id) }}" class="btn btn-primary">{{ $product->featured }}</a></td>
                                 @else
-                                    <td><a href="" class="btn btn-danger">{{ $product->featured }}</a></td>
+                                    <td><a href="{{ route('featured.status',$product->id) }}" class="btn btn-danger">{{ $product->featured }}</a></td>
                                 @endif    
                                 
                                 @if ($product->today_deal=='on')
