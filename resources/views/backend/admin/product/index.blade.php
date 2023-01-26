@@ -146,9 +146,9 @@
                                 @endif 
 
                                 @if ($product->status=='on')
-                                    <td><a href="" class="btn btn-primary">{{ $product->status }}</a></td>
+                                    <td><a href="{{ route('status.update',$product->id) }}" class="btn btn-primary">{{ $product->status }}</a></td>
                                 @else
-                                    <td><a href="" class="btn btn-danger">{{ $product->status }}</a></td>
+                                    <td><a href="{{ route('status.update',$product->id) }}" class="btn btn-danger">{{ $product->status }}</a></td>
                                 @endif
                                 
                                

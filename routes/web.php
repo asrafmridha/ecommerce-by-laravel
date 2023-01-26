@@ -79,6 +79,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
 
   Route::get('featured/status{id}', [StatusController::class, 'featured'])->name('featured.status');
   Route::get('todaydeal/status{id}', [StatusController::class, 'today_deal'])->name('deal.status');
+  Route::get('status{id}', [StatusController::class, 'status'])->name('status.update');
 
 
   //SubCategory Routes

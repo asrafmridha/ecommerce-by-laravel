@@ -36,4 +36,19 @@ class StatusController extends Controller
         $today_deal->update();
         return back()->withSuccess('Today Deal Updated Successfully');
     }
+
+    public function status($id)
+    {
+        $status = Product::find($id);
+        if ($status->status == "on") {
+            $status->status = 'off';
+        } else if ($status->status  == "off") {
+            $status->status = 'on';
+        } else {
+            $status->status = 'on';
+        }
+
+        $status->update();
+        return back()->withSuccess('status Updated Successfully');
+    }
 }
