@@ -120,11 +120,18 @@
                                             for="service_select_"></label>
                                         </div>
                                     </td>
+                                    @php
+                                        $category=DB::table('categories')->where('id',$product->category_id)->first();
+                                        $subcategorie=DB::table('sub_categories')->where('id',$product->subcategory_id)->first();
+                                        $brand= DB::table('brands')->where('id',$product->brand_id)->first();
+                                    @endphp
+
+
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->code }}</td>
-                                    <td>{{ $product->category_id }}</td>
-                                    <td>{{ $product->subcategory_id }}</td>
-                                    <td>{{ $product->brand_id }}</td>
+                                    <td>{{ $category->category_name }}</td>
+                                    <td>{{ $subcategorie->sub_category_name }}</td>
+                                    <td>{{ $brand->brand_name }}</td>
                                     <td>{{ $product->featured }}</td>
                                     <td>{{ $product->today_deal }}</td>
                                     <td>{{ $product->status }}</td>
