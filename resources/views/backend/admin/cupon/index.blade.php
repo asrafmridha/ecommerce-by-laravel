@@ -288,7 +288,7 @@
 
 {{-- End mass delete modal --}}
 
-@endsection
+
 {{-- Modal For add  Add cupon   --}}
 <div class="modal fade" id="AddcuponModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -349,6 +349,9 @@
         </div>
     </div>
 </div> 
+
+@endsection
+
 
 
 

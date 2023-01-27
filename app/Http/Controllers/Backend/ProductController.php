@@ -11,6 +11,7 @@ use App\Models\SubCategory;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -176,5 +177,22 @@ class ProductController extends Controller
     {
         Product::find($id)->delete();
         return back()->withSuccess('Product Delete Successfully');
+    }
+
+    public function product_category_search($id)
+    {
+        $category_id = Category::where('id', $id)->first();
+        $category_name = $category_id->category_name;
+
+        $category = Category::where('category_name', $category_name)->get();
+
+        $view = View('backend.admin.product.index', compact('category'))->render();
+        // return view('backend.admin.product.index', compact('category'));
+
+        return response()->json([
+
+            'view' => $view
+
+        ]);
     }
 }

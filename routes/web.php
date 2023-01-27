@@ -74,6 +74,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
   Route::get('/categoryDateFilter', [CategoryController::class, 'categoryDateFilter'])->name('category.dateFilter');
 
   Route::get('/category-search', [CategoryController::class, 'category_search'])->name('category.search');
+  Route::post('/productcategory/search/{id?}',[ProductController::class,'product_category_search'])->name('product-category-seach');
 
   //All Status
 

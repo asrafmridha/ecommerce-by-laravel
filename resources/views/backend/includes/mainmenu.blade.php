@@ -84,7 +84,12 @@
         <li class="@yield('product') nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Product</span></a>
             <ul class="menu-content">
                 <li>
-                    <a class="d-flex align-items-center" href="{{ route('product.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Add Product</span>
+                    <a class="d-flex align-items-center" href="{{ route('product.create') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Add Product</span>
+                    </a>
+                </li>
+
+                    <li>
+                    <a class="d-flex align-items-center" href="{{ route('product.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Product List</span>
                     </a>
                 </li>
                 

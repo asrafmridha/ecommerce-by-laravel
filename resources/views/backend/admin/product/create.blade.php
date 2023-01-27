@@ -15,7 +15,7 @@
                     <div class="col-md-6">
                         <div class="col-12">
                             <label class="h5" for="name">Enter Product Name</label>
-                            <input type="text" name="name" class=" form-control import">
+                            <input type="text" name="name" value="{{ old('name') }}" class=" form-control import">
                                     @error('name')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -202,12 +202,10 @@
                     <div class="col-12 mt-2">
                         <div class="form-group">
                             <label for="short_description"> {{ __('Short Description') }} <span class="text-danger">*</span> </label>
-                            <textarea name="description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ old('short_description') }}</textarea>
+                            <textarea name="short_description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ old('short_description') }}</textarea>
                                     @error('short_description')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
-                                    
-                            
                         </div>
                     </div>
                 </div>
@@ -231,10 +229,10 @@
                                     <input type="file" class="custom-file-input" id="single_product_image" name="thumbnails">
                                         <label class="custom-file-label" for="single_product_image">Choose Image</label>
                                 </div>
-                                @error('room_photo')
+                                @error('thumbnails')
                                     <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
+                                @enderror
+                        </div>
                     </div> <br> <br>
 
                     <div class="col-12">
@@ -253,7 +251,7 @@
                                         <table class="table-bordered" id="dynamic_field"></table>
                                     </div>
                                 </div>
-                                @error('room_photo')
+                                @error('images')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                         </div>
@@ -264,7 +262,7 @@
                         <label for="featured">Featured</label>
                         <label class="switch">
                     
-                            <input type="checkbox" name="featured" checked>
+                            <input type="checkbox" name="featured" >
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -273,7 +271,7 @@
                     <label for="featured">Today Deal</label>
                     <label class="switch">
                     
-                        <input type="checkbox" name="today_deal" checked>
+                        <input type="checkbox" name="today_deal" >
                         <span class="slider round"></span>
                     </label>
                 </div>

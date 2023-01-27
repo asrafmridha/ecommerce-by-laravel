@@ -58,18 +58,39 @@
             </div>
         </div>
          <div class="row align-items-md-center">
-            <div class="col-md">
-                <div class="form-group mb-md-0">
-                    <div class="input-group">
-                            <input required type="search" name="search" class="form-control table_search " placeholder="Search Here by Name or Designation"  value="{{old('search')}}">
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <button type="submit" class="btn btn-sm" style="height: 23px"><i data-feather='search'></i></button>
-                          </span>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-3 form-group">
+                <label class="h5" for="brand_id">Category</label>
+                    <select name="brand_id" id="category_id" class="form-control">
+                            @foreach ($category as $category)
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                            @endforeach       
+                    </select>
             </div>
+             <div class="col-md-3 form-group">
+                <label class="h5" for="brand_id">Brand</label>
+                    <select name="brand_id" id="brand_id" class="form-control">
+                            @foreach ($brand as $brand)
+                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                            @endforeach       
+                    </select>
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label class="h5" for="brand_id">Warehouse</label>
+                    <select name="brand_id" id="warehouse_id" class="form-control">
+                            @foreach ($warehouse as $warehouse)
+                                <option value="{{ $warehouse->id }}">{{ $warehouse->warehouse_name }}</option>
+                            @endforeach       
+                    </select>
+            </div>
+            {{-- <div class="col-md-3 form-group">
+                <label class="h5" for="brand_id">Status</label>
+                    <select name="brand_id" id="" class="form-control">
+                            @foreach ($warehouse as $warehouse)
+                                <option value="">{{ $warehouse->warehouse_name }}</option>
+                            @endforeach       
+                    </select>
+            </div> --}}
         </div> 
     </form>
 </div>
@@ -330,5 +351,143 @@
     </div>
 </div> 
 
+@endsection
+
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+
+            $('#category_id').on('change',function(){
+            var category_id=$(this).val();
+            $.ajax({
+                type: "POST",
+                url: "{{ route('product-category-seach') }}"+'/'+category_id,
+                dataType: "dataType",
+                success: function (response) {
+                    
+                }
+            });
+             
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            //select all feature
+            $('.select_all').change(function() {
+                ids = []
+                if ($(this).is(":checked")) {
+                    $('.select_item').prop('checked', true);
+                    $('.select_item').each(function() {
+                        ids.push($(this).attr('id').split('_')[2]);
+                    });
+                    if (ids.length == 0) {
+                        $('#all_action').addClass('d-none');
+                    } else {
+                        $('#all_action').removeClass('d-none');
+                        $('#export_id').val(ids);
+                    }
+                } else {
+                    $('.select_item').prop('checked', false);
+                    $('#all_action').addClass('d-none');
+                }
+                $(document).on('click', '#mass_delete', function(){
+                $('#mass_delete').click(function() {
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('category.bulkDelete') }}",
+                        data: {
+                            'ids': ids
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.success);
+                                $('#all_action').addClass('d-none');
+                                window.location.reload();
+                            }
+                        }
+                    })
+                });
+            });
+            //individual select feature
+            $('.select_item').change(function() {
+                ids = []
+                $('.select_item').each(function() {
+                    if ($(this).is(":checked")) {
+                        ids.push($(this).attr('id').split('_')[2]);
+                    }
+                });
+                if (ids.length == 0) {
+                    $('#all_action').addClass('d-none');
+                    $('.select_all').prop('checked', false);
+                } else {
+                    $('#all_action').removeClass('d-none');
+                    $('#export_id').val(ids);
+                }
+                $(document).on('click', '#mass_delete', function(e) {
+                    $.ajax({
+                        type: 'get',
+                        url: "{{ route('category.bulkDelete') }}",
+                        data: {
+                            'ids': ids
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                toastr.success(response.success);
+                                $('#all_action').addClass('d-none');
+                                window.location.reload();
+                            }
+                        }
+                    })
+                });
+            });
+            // seach
+            $('#search').keyup(function() {
+                var value = $(this).val().toLowerCase();
+                $('#service_table tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+            //service search
+            $('#search').keyup(function(){
+                var value = $(this).val();
+                $.ajax({
+                    type:'get',
+                    url:"",
+                    data:{'value':value},  
+                    success:function(response){                  
+                            $('#data_table').html(response);
+                    }
+                });
+            });
+        });
+    });
+    </script>
 @endsection
 

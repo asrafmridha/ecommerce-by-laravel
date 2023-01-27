@@ -257,7 +257,6 @@
 
 {{-- End mass delete modal --}}
 
-@endsection
 {{-- Modal For add  Add pickuppoint   --}}
 <div class="modal fade" id="AddpickuppointModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -313,6 +312,9 @@
         </div>
     </div>
 </div> 
+
+@endsection
+
 
 
 
