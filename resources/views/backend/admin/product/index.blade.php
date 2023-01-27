@@ -187,10 +187,10 @@
                                                                 </button>
                                                 </div> 
                                                 <div class="modal-body text-white bg-dark">
-                                                    <form action="{{ route('brand.destroy',$product->id) }}" method="POST">
+                                                    <form action="{{ route('product.destroy',$product->id) }}" method="POST">
                                                         @method('delete')
                                                         @csrf
-                                                            Are you sure want to delete this Brand?
+                                                            Are you sure want to delete this Product?
                                                     
                                                         <div class="modal-footer">
                                                                     <a type="button" class="btn btn-secondary" data-dismiss="modal">Close</a>

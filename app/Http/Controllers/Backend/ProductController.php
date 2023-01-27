@@ -27,8 +27,7 @@ class ProductController extends Controller
         $brand = Brand::all();
         $warehouse = Warehouses::all();
         $pickuppoint = Pickuppoint::all();
-        // $subcategory = SubCategory::where('category_id', $category->id)->get();
-        return view('backend.admin.product.create', compact('product', 'category', 'brand', 'warehouse', 'pickuppoint'));
+        return view('backend.admin.product.index', compact('product', 'category', 'brand', 'warehouse', 'pickuppoint'));
     }
 
     /**
@@ -38,7 +37,12 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $product = Product::all();
+        $category = Category::all();
+        $brand = Brand::all();
+        $warehouse = Warehouses::all();
+        $pickuppoint = Pickuppoint::all();
+        return view('backend.admin.product.create', compact('product', 'category', 'brand', 'warehouse', 'pickuppoint'));
     }
 
     /**
@@ -93,12 +97,12 @@ class ProductController extends Controller
         $product->stock_quantity = $request->stock_quantity;
         $product->color = $request->color;
         $product->size = $request->size;
-        $product->description = $request->description;
+        $product->description = $request->short_description;
         $product->video = $request->video;
 
-        $product->featured = $request->featured;
-        $product->today_deal = $request->today_deal;
-        $product->status = $request->status;
+        $product->featured = $request->featured ?? 'off';
+        $product->today_deal = $request->today_deal ?? 'off';
+        $product->status = $request->status ?? 'off';
         // $product->admin_id = Auth::id();
         // $product->date = date('d-m-Y');
 
@@ -170,6 +174,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::find($id)->delete();
+        return back()->withSuccess('Product Delete Successfully');
     }
 }
