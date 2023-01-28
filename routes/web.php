@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SpecialOfferController;
+use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\CategoryController;
@@ -32,9 +33,7 @@ use Illuminate\Support\Facades\Session;
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-})->name('home');
+
 
 // Route::middleware([
 //     'auth:sanctum',
@@ -48,20 +47,23 @@ Route::get('/', function () {
 
 //   For Admin or user check
 
-// for localization 
+Route::get('/', function () {
+  return view('welcome');
+})->name('home');
 
+// for localization 
 Route::get('locale/{locale}', function ($locale) {
   Session::put('locale', $locale);
   return back();
 })->name('locale');
 
-Route::get('/dashboard', function () {
-  return view('backend.admin.home');
-})->middleware(['is_admin'])->name('dashboard');
 
 
 
-Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
+
+Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], function () {
+
+  Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
   //Category Routes
   Route::resource('category', CategoryController::class);
 
