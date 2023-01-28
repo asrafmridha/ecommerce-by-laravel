@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Session;
 //   For Admin or user check
 
 Route::get('/', function () {
-  return view('welcome');
+  return view('frontend.home');
 })->name('home');
 
 // for localization 
@@ -63,7 +63,7 @@ Route::get('locale/{locale}', function ($locale) {
 
 Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], function () {
 
-  Route::get('/dashboard',[AdminController::class,'index'])->name('dashboard');
+  Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
   //Category Routes
   Route::resource('category', CategoryController::class);
 
@@ -76,7 +76,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
   Route::get('/categoryDateFilter', [CategoryController::class, 'categoryDateFilter'])->name('category.dateFilter');
 
   Route::get('/category-search', [CategoryController::class, 'category_search'])->name('category.search');
-  Route::post('/productcategory/search/{id?}',[ProductController::class,'product_category_search'])->name('product-category-seach');
+  Route::post('/productcategory/search/{id?}', [ProductController::class, 'product_category_search'])->name('product-category-seach');
 
   //All Status
 
