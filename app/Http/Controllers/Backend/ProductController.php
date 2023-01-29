@@ -54,6 +54,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $subcategory = SubCategory::where('id', $request->subcategory_id)->first();
 
         $request->validate([
@@ -70,10 +71,10 @@ class ProductController extends Controller
             'tags'           => 'required',
             'discount_price' => 'required',
             'stock_quantity' => 'required',
-            'size' => 'required',
+            'size'           => 'required',
             'short_description' => 'required',
             // 'thumbnails'        => 'required|image',
-            // 'images'        => 'required|image',
+            // 'images'            => 'required|image',
         ]);
 
         //For get Category id
@@ -85,21 +86,21 @@ class ProductController extends Controller
         $product->category_id      = $subcategory->category_id;
         $product->subcategory_id   = $request->subcategory_id;
         $product->childcategory_id = $request->childcategory_id;
-        $product->code = $request->code;
-        $product->brand_id = $request->brand_id;
-        $product->pickup_point_id = $request->pickup_point_id;
-        $product->unit   = $request->unit;
-        $product->tags = $request->tags;
-        $product->purchase_price = $request->purchase_price;
-        $product->selling_price = $request->selling_price;
-        $product->discount_price = $request->discount_price;
-        $product->warehouse = $request->warehouse;
-        $product->discount_price = $request->discount_price;
-        $product->stock_quantity = $request->stock_quantity;
-        $product->color = $request->color;
-        $product->size = $request->size;
-        $product->description = $request->short_description;
-        $product->video = $request->video;
+        $product->code             = $request->code;
+        $product->brand_id         = $request->brand_id;
+        $product->pickup_point_id  = $request->pickup_point_id;
+        $product->unit             = $request->unit;
+        $product->tags             = $request->tags;
+        $product->purchase_price   = $request->purchase_price;
+        $product->selling_price    = $request->selling_price;
+        $product->discount_price   = $request->discount_price;
+        $product->warehouse        = $request->warehouse;
+        $product->discount_price   = $request->discount_price;
+        $product->stock_quantity   = $request->stock_quantity;
+        $product->color            = $request->color;
+        $product->size             = $request->size;
+        $product->description      = $request->short_description;
+        $product->video            = $request->video;
 
         $product->featured = $request->featured ?? 'off';
         $product->today_deal = $request->today_deal ?? 'off';
@@ -183,11 +184,15 @@ class ProductController extends Controller
     {
         $category_id = Category::where('id', $id)->first();
         $category_name = $category_id->category_name;
+        $product = Product::all();
+        $category = Category::all();
+        $brand = Brand::all();
+        $warehouse = Warehouses::all();
+        $pickuppoint = Pickuppoint::all();
 
         $category = Category::where('category_name', $category_name)->get();
 
-        $view = View('backend.admin.product.index', compact('category'))->render();
-        // return view('backend.admin.product.index', compact('category'));
+        $view = View('backend.admin.product.index', compact('category', 'brand', 'warehouse', 'pickuppoint', 'product'))->render();
 
         return response()->json([
 

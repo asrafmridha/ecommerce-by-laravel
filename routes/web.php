@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\StatusController;
 use App\Models\ChildCategory;
 use App\Models\Pickuppoint;
@@ -47,19 +48,13 @@ use Illuminate\Support\Facades\Session;
 
 //   For Admin or user check
 
-Route::get('/', function () {
-  return view('frontend.home');
-})->name('home');
+Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 // for localization 
 Route::get('locale/{locale}', function ($locale) {
   Session::put('locale', $locale);
   return back();
 })->name('locale');
-
-
-
-
 
 Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], function () {
 
@@ -115,6 +110,13 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
   Route::get('/seo', [SettingController::class, 'index'])->name('seo.index');
 
   Route::post('/seo-update/{id}', [SettingController::class, 'update'])->name('seo.update');
+  // websiteSetting 
+
+  Route::get('/generalSetting', [SettingController::class, 'generalSetting_index'])->name('generalSetting.index');
+
+  Route::post('/websiteSetting-update/{id}', [SettingController::class, 'website_setting_update'])->name('generalSettings.update');
+
+
 
   // Smtp  
   Route::get('/smtp', [SmtpController::class, 'index'])->name('smtp.index');

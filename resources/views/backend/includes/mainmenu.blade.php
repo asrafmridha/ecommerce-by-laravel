@@ -126,10 +126,6 @@
                     </a>
                 </li>
                 <li>
-                    <a class=" d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Website Setting</span>
-                    </a>
-                </li>
-                <li>
                     <a class="d-flex align-items-center" href="{{ route('page.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Create Page</span>
                     </a>
                 </li>
@@ -143,6 +139,10 @@
                     </a>
                 </li>
             </ul>
+            </li>
+            <li>
+                <a class=" d-flex align-items-center" href="{{ route('generalSetting.index') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">General Setting</span>
+                </a>
             </li>
         </ul>
     </div>

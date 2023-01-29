@@ -9,7 +9,7 @@
         <h4 class="p-1 bg-primary">Add New Product</h4>
         <div class="card card-congratulation-medal">
             <div class="card-body">
-            <form action="{{ route('product.store') }}" method="POST">
+            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-6">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="h5" for="unit">Unit</label>
-                            <input type="number" name="unit" class=" form-control import">
+                            <input type="number" name="unit" class=" form-control import" value="{{ old('unit') }}" >
                                     @error('unit')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-6 mt-2">
                                 <label class="h5" for="purchase_price">Purchase Price</label>
-                                <input type="text" name="purchase_price" class=" form-control import">
+                                <input type="text" name="purchase_price" class=" form-control import" value="{{ old('purchase_price') }}">
                                     @error('purchase_price')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -80,7 +80,7 @@
                             </div>
                             <div class="col-6 mt-2">
                                 <label class="h5" for="selling_price">Selling Price</label>
-                                <input type="text" name="selling_price" class=" form-control import">
+                                <input type="text" name="selling_price" class=" form-control import" value="{{ old('selling_price') }}">
                                     @error('selling_price')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -130,7 +130,7 @@
                     <div class="col-md-6">
                         <div class="col-12">
                               <label class="h5" for="code">Product Code</label>
-                                <input type="text" name="code" class=" form-control import">
+                                <input type="text" name="code" class="form-control import"  value="{{ old('code') }}">
                                     @error('code')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -164,7 +164,7 @@
                         </div>
                         <div class="col-8 mt-2">
                               <label class="h5" for="tags">Tags*</label>
-                                <input type="text" name="tags" class=" form-control import">
+                                <input type="text" name="tags" class=" form-control import" value="{{ old('tags') }}">
                                     @error('tags')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -173,7 +173,7 @@
                         </div>
                         <div class="col-12 mt-2">
                               <label class="h5" for="discount_price">Discount Price*</label>
-                                <input type="text" name="discount_price" class=" form-control import">
+                                <input type="text" name="discount_price" class=" form-control import" value="{{ old('discount_price') }}">
                                     @error('discount_price')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-12 mt-2">
                               <label class="h5" for="stock_quantity">Stock*</label>
-                                <input type="text" name="stock_quantity" class=" form-control import">
+                                <input type="text" name="stock_quantity" class=" form-control import" value="{{ old('stock_quantity') }}">
                                     @error('stock_quantity')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -191,7 +191,7 @@
                         </div>
                          <div class="col-8 mt-2">
                               <label class="h5" for="size">Size*</label>
-                                <input  type="text" name="size" class=" form-control import">
+                                <input  type="text" name="size" class=" form-control import" value="{{ old('size') }}">
                                     @error('size')
                                         <div class="alert alert-danger">
                                             {{$message}}
@@ -235,13 +235,13 @@
                         </div>
                     </div> <br> <br>
 
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <div class="form-group">
                             <label for="single_product_image">More Image <small class="text-danger">*(Image recommended size 370 X 240 px) </small></label>
                                 <div class="custom-file">
                                     <div class="row">
                                         <div class="col-md-10">
-                                            <input type="file" class="custom-file-input" id="more-image" name="images[]">
+                                            <input type="file" class="custom-file-input" id="more-image" name="images[]" multiple>
                                             <label class="custom-file-label" 
                                         for="single_product_image">Choose Image</label>
                                         </div>
@@ -255,7 +255,24 @@
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                         </div>
-                    </div>
+                    </div> --}}
+
+                      <div class="col-12">
+                                <div class="form-group">
+                                    <label for="image">Product Multi Image <small class="text-danger">(Aspect ratio 7∶5 is preferred for best visualization)</small></label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="image" name="images[]" multiple>
+                                        <label class="custom-file-label" for="image">Choose Image</label>
+                                    </div>
+                                </div>
+                                @error('images')
+                                    <div class="alert alert-danger">
+                                        <div class="alert-body">
+                                            {{ $message }}
+                                        </div>
+                                    </div>
+                                @enderror
+                        </div>
                 
             <div class="row">
                     <div class="col-md-4">
@@ -285,13 +302,7 @@
                     </label>
                 </div>
             </div>
-
-
-                
-                
-                
                 </div>
-                
             </div>
         </div>
     </div>

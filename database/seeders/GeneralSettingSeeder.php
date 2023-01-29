@@ -17,7 +17,7 @@ class GeneralSettingSeeder extends Seeder
     {
         GeneralSetting::create([
             'currency'           => 'taka ৳',
-            'email'              => 'admin@.com',
+            'email'              => 'admin@gmail.com',
             'alter_email'        => 'support@admin.com',
             'phone'              => '01776716093',
             'alter_phone'        =>  '01679433941',

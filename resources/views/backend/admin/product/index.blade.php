@@ -119,6 +119,7 @@
                                             for="colorCheck1"></label>
                                 </div> 
                             </th>
+                            <th>Thumbnails</th>
                             <th>Name</th>
                             <th>Code</th>
                             <th>Category</th>
@@ -133,6 +134,7 @@
                             <tbody>
                                   @foreach ($product as $product) 
                                 <tr>
+                                    
                                     <td>
                                         <div class="custom-control custom-control-primary custom-checkbox">
                                         <input type="checkbox" class="custom-control-input select_item"
@@ -140,6 +142,9 @@
                                         <label class="custom-control-label text-white"
                                             for="service_select_"></label>
                                         </div>
+                                    </td>
+                                    <td>
+                                        <img src="{{ asset('uploads/product/'.$product->thumbnails) }}" height="90px" width="100px" alt="thumbalainls">
                                     </td>
                                     @php
                                         $category=DB::table('categories')->where('id',$product->category_id)->first();
