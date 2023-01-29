@@ -34,7 +34,20 @@
 				<div class="col-lg-5 offset-lg-4 fill_height">
 					<div class="banner_content">
 						<h1 class="banner_text">{{ $banner_product->name }}</h1>
-						<div class="banner_price"><span>$530</span>{{ $banner_product->selling_price }}</div>
+						
+						@if ($banner_product->discount_price==null)
+						<div class="banner_price">
+							{{ $banner_product->selling_price }}
+						</div>
+							
+						@else
+
+						<div class="banner_price">
+							<span>{{ generalSetting()->currency }}{{ $banner_product->selling_price }}</span>{{ generalSetting()->currency }}{{ $banner_product->selling_price-$banner_product->discount_price }}
+						</div>
+							
+						@endif
+						
 						<div class="banner_product_name">{{ $banner_product->brand->brand_name }}</div>
 						<div class="button banner_button"><a href="#">Shop Now</a></div>
 					</div>
