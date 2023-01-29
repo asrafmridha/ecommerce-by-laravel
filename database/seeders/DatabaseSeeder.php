@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             SmtpSeeder::class,
             UserSeeder::class,
+            GeneralSettingSeeder::class,
         ]);
     }
 }
