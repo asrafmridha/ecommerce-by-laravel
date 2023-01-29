@@ -27,19 +27,21 @@
                                             @foreach ($subcategories as $item)
 											<li class="hassubs">
 												<a href="#">{{ $item->sub_category_name }}
-                                                    
-                                                    {{-- <i class="fas fa-chevron-right"></i> --}}
+                                                    <i class="fas fa-chevron-right"></i>
                                                 </a>
 
-												{{-- <ul>
+                                            @php
+                                                $chid_category=DB::table('child_categories')->where('subcategory_id',$item->id)->get();
                                                 
-													<li>
-                                                        <a href="#">{{ $item->sub_category_name }}<i class="fas fa-chevron-right"></i>
+                                            @endphp
+												<ul>
+												@foreach ($chid_category as $item) 
+                                               	    <li>
+                                                        <a href="#">{{ $item->childcategory_name }}<i class="fas fa-chevron-right"></i>
                                                         </a>
                                                     </li>
-                                               
-													
-												</ul> --}}
+                                                @endforeach    
+												</ul>
 											</li>
                                             @endforeach       
 										</ul>
