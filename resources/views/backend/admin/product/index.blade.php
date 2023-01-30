@@ -176,11 +176,6 @@
                                 @else
                                     <td><a href="{{ route('status.update',$product->id) }}" class="btn btn-danger">{{ $product->status }}</a></td>
                                 @endif
-                                
-                               
-                                     
-                                   
-                            
                                      {{-- <td><img height="120px" width="150px" src="{{ asset('uploads/brand/'.$brand->brand_logo) }}" alt=""></td> --}}
                                             
                                         <td>
@@ -189,10 +184,10 @@
                                                     <i data-feather="more-vertical"></i>
                                                 </button>
                                                 <div class="dropdown-menu">
-                                                    <button data-target="#updatebrandModal__{{ $product->id }}" data-toggle="modal"  class="btn ">
+                                                    <a class="dropdown-item" href="{{ route('product.edit',$product->id) }}">
                                                             <i data-feather="edit-2" class="mr-50"></i>
                                                             <span>Edit</span>
-                                                                                                                                        </button>
+                                                                                                                                        </a>
                                                     <button data-target="#delete_subcategory__{{ $product->id }}" data-toggle="modal" type="submit" class=" dropdown-item" href="javascript:void(0);">
                                                         <i data-feather="trash" class="mr-50"></i>
                                                         <span>Delete</span>

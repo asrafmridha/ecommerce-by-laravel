@@ -114,7 +114,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
 
   Route::get('/generalSetting', [SettingController::class, 'generalSetting_index'])->name('generalSetting.index');
 
-  Route::post('/websiteSetting-update/{id}', [SettingController::class, 'website_setting_update'])->name('generalSettings.update');
+  Route::post('/generalSetting-update/{id}', [SettingController::class, 'generalSetting_update'])->name('generalSettings.update');
 
 
 

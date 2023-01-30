@@ -153,7 +153,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $category = Category::all();
+        $brand = Brand::all();
+        $warehouse = Warehouses::all();
+        $pickuppoint = Pickuppoint::all();
+        return view('backend.admin.product.edit', compact('product', 'category', 'brand', 'warehouse', 'pickuppoint'));
     }
 
     /**

@@ -145,9 +145,9 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="subcategory_name">Currency</label>
-                                            <select class="form-control" aria-label="Default select example" name="category_id">
-                                            <option value="Taka ৳">Taka ৳</option>
-                                            <option value="Dollar $">Dollar $</option>
+                                            <select class="form-control" aria-label="Default select example" name="currency">
+                                            <option value="৳">Taka ৳</option>
+                                            <option value="$">Dollar $</option>
                                             </select>
                                         </div>
                                     </div>
