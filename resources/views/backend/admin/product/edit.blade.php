@@ -116,8 +116,8 @@
                             <label class="h5" for="color">Color</label>
                             <select name="color" id="" class="form-control">
                                 <option >==Select Color==</option>
-                                <option value="yellow">yellow</option>
-                                <option value="red">Red</option>
+                                <option @if ($product->color=='yellow') selected   @endif value="yellow">yellow</option>
+                                <option @if ($product->color=='red') selected   @endif value="red">Red</option>
                             </select>
                                     @error('color')
                                         <div class="alert alert-danger">
@@ -202,7 +202,7 @@
                     <div class="col-12 mt-2">
                         <div class="form-group">
                             <label for="short_description"> {{ __('Short Description') }} <span class="text-danger">*</span> </label>
-                            <textarea name="short_description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ $product->short_description }}</textarea>
+                            <textarea name="short_description" id="short_description" class="form-control" cols="5" rows="5" placeholder="Write short description..">{{ $product->description }}</textarea>
                                     @error('short_description')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
@@ -287,7 +287,9 @@
                         <label for="featured">Featured</label>
                         <label class="switch">
                     
-                            <input type="checkbox" name="featured" >
+                            <input type="checkbox" name="featured" @if ($product->featured=='on' )
+                                checked
+                            @endif>
                             <span class="slider round"></span>
                         </label>
                     </div>
@@ -296,7 +298,9 @@
                     <label for="featured">Today Deal</label>
                     <label class="switch">
                     
-                        <input type="checkbox" name="today_deal" >
+                        <input type="checkbox" name="today_deal" @if ($product->today_deal=='on' )
+                                checked
+                            @endif >
                         <span class="slider round"></span>
                     </label>
                 </div>
@@ -305,7 +309,9 @@
                     <label for="featured">Status</label>
                     <label class="switch">
                     
-                        <input type="checkbox" name="status" checked>
+                        <input type="checkbox" name="status" @if ($product->status=='on' )
+                                checked
+                            @endif>
                         <span class="slider round"></span>
                     </label>
                 </div>
