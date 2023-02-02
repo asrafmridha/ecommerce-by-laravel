@@ -38,12 +38,14 @@
 	<div class="single_product">
 		<div class="container">
 			<div class="row">
-
 				<!-- Images -->
-				<div class="col-lg-1 order-lg-1 order-2">
+				<div class="col-lg-1">
 					<ul class="image_list">
 						@php
-						  $images=json_decode($single_product->images,true);	
+						  $images=json_decode($single_product->images,true);
+						  $colors=json_decode($single_product->color,true);	
+		
+						  $sizes=json_decode($single_product->size,true);	
 						@endphp
 						@foreach($images as $image)
 						
@@ -53,17 +55,28 @@
 				</div>
 
 				<!-- Selected Image -->
-				<div class="col-lg-5 order-lg-2 order-1">
+				<div class="col-lg-4 order-lg-2">
 					<div class="image_selected">
 						<img src="{{ asset('uploads/product/'.$single_product->thumbnails) }}" alt="product Image"></div>
 				</div>
 
 				<!-- Description -->
-				<div class="col-lg-4 order-3">
+				<div class="col-lg-3 order-3">
 					<div class="product_description">
 						<div class="product_category">{{ $single_product->category->category_name }} > {{ $single_product->subcategory->sub_category_name }} </div>
 						<div class="product_name">{{ $single_product->name }}</div>
-						<div class="rating_r rating_r_4 product_rating"><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="">Brand: {{ $single_product->brand->brand_name }} </div>
+						<div class="">Stock: {{ $single_product->stock_quantity }} </div>
+						<div class="">Unit: {{ $single_product->unit }} </div>
+
+						<div>
+
+							<i class="fa-regular fa-star"></i>
+							<i class="fa-regular fa-star"></i>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+							<span class="fa fa-star checked"></span>
+						</div>
 						{{-- <div class="product_text"><p>{{ $single_product->description }}</p></div> --}}
 						<div class="order_info d-flex flex-row">
 							<form action="#">
@@ -71,22 +84,27 @@
 
 									<div class="form-group">
 										<div class="row">
+										@isset($single_product->size)
+							
 											<div class="col-lg-6">
 												<label for="">Size</label>
 												<select name="size" id="" class="form-control form-control-sm">
-													<option value="">A</option>
-													<option value="">B</option>
-													<option value="">C</option>
+													@foreach ($sizes as $size)
+													<option value="">{{ $size }}</option>
+													@endforeach
 												</select>
 											</div>
+										@endisset
+										@isset($single_product->color)	
 											<div class="col-lg-6">
 												<label for="">Color</label>
 												<select name="size" id="" class="form-control form-control-sm">
-													<option value="">A</option>
-													<option value="">B</option>
-													<option value="">C</option>
+													@foreach($colors as $color)
+													<option value="">{{ $color }}</option>
+													@endforeach
 												</select>
 											</div>
+										@endisset	
 										</div>
 									</div>
 
@@ -122,12 +140,28 @@
 									<button type="button" class="button cart_button">Add to Cart</button>
 									<div class="product_fav"><i class="fas fa-heart"></i></div>
 								</div>
-								
 							</form>
 						</div>
 					</div>
-				</div>
+				</div>	
 
+				<div class="col-lg-2 order-9">
+					<strong class="text-muted">Pickup POint Of This Product</strong> <br>
+					<i class="fa fa-map">{{ $single_product->pickuppoint->pickup_point_address }}</i>
+				</div>
+			</div>
+		</div>
+	</div> <br> <br>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card card-header">
+				<div class="  offset-5">
+					<h4>Product Details of : {{ $single_product->name }}</h4>
+				</div>
+				<div class="card-body offset-5">
+					{{ $single_product->description }}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -139,7 +173,7 @@
 			<div class="row">
 				<div class="col">
 					<div class="viewed_title_container">
-						<h3 class="viewed_title">Recently Viewed</h3>
+						<h3 class="viewed_title">Related Product</h3>
 						<div class="viewed_nav_container">
 							<div class="viewed_nav viewed_prev"><i class="fas fa-chevron-left"></i></div>
 							<div class="viewed_nav viewed_next"><i class="fas fa-chevron-right"></i></div>
@@ -151,29 +185,17 @@
 						<!-- Recently Viewed Slider -->
 
 						<div class="owl-carousel owl-theme viewed_slider">
+							@foreach ($related_products as $item)
+								
 							
 							<!-- Recently Viewed Item -->
 							<div class="owl-item">
-								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_1.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225<span>$300</span></div>
-										<div class="viewed_name"><a href="#">Beoplay H7</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
 								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_2.jpg" alt=""></div>
+									<div class="viewed_image">
+										<img src="{{ asset('uploads/product/'.$item->thumbnails) }}" alt="{{ $item->name }}"></div>
 									<div class="viewed_content text-center">
-										<div class="viewed_price">$379</div>
-										<div class="viewed_name"><a href="#">LUNA Smartphone</a></div>
+										<div class="viewed_price">{{ $item->selling_price }}</div>
+										<div class="viewed_name"><a href="#">{{ $item->name }}</a></div>
 									</div>
 									<ul class="item_marks">
 										<li class="item_mark item_discount">-25%</li>
@@ -181,66 +203,7 @@
 									</ul>
 								</div>
 							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_3.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225</div>
-										<div class="viewed_name"><a href="#">Samsung J730F...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_4.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$379</div>
-										<div class="viewed_name"><a href="#">Huawei MediaPad...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_5.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$225<span>$300</span></div>
-										<div class="viewed_name"><a href="#">Sony PS4 Slim</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
-
-							<!-- Recently Viewed Item -->
-							<div class="owl-item">
-								<div class="viewed_item d-flex flex-column align-items-center justify-content-center text-center">
-									<div class="viewed_image"><img src="images/view_6.jpg" alt=""></div>
-									<div class="viewed_content text-center">
-										<div class="viewed_price">$375</div>
-										<div class="viewed_name"><a href="#">Speedlink...</a></div>
-									</div>
-									<ul class="item_marks">
-										<li class="item_mark item_discount">-25%</li>
-										<li class="item_mark item_new">new</li>
-									</ul>
-								</div>
-							</div>
+							@endforeach
 						</div>
 
 					</div>
