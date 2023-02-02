@@ -11,6 +11,7 @@ use App\Models\SubCategory;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -204,5 +205,14 @@ class ProductController extends Controller
             'view' => $view
 
         ]);
+    }
+
+    public function product_details($slug)
+    {
+        $banner_product = Product::where('status', 'on')->latest()->first();
+        $categorires = Category::all();
+        $single_product = Product::where('slug', $slug)->first();
+        $related_product = DB::table('products')->where('subcategory_id', $single_product->subcategory_id)->orderBy('id', 'DESC')->take(10)->get();
+        return view('frontend.product_details', compact('single_product', 'banner_product', 'categorires'));
     }
 }
