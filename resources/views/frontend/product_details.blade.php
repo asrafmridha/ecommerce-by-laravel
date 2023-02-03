@@ -165,39 +165,80 @@
 				</div>
 			</div>
 		</div>
-		<div class="row container">
-			<div class="col-5 offset-3">
-				dfgfdgdf
+	</div>
+
+	<div class="row m-2">
+	    
+			<div class="col-6 offset-1 mt-2 card">
+				<strong class="h4">Rating and Review of: </strong>
 			</div>
-			<div class="col-lg-1">
+		<form action="{{ route('review.store') }}" method="POST">
+				@csrf
+			<div class="col-6 offset-1">
 				<div class="form-group">
+					@if(Session::has('success'))
+					 	<p class="alert alert-info">{{ Session::get('success') }}</p>
+					@endif
 					<label for="details">Write Your Review</label>
-					<textarea name="" id="" cols="30" rows="5"></textarea>
+					<textarea name="review" id="" cols="30" rows="5"></textarea>
+					@error('review')
+						<div class="alert alert-danger">
+                            <div class="alert-body">
+                                {{ $message }}
+                            </div>
+                            </div>
+					@enderror
 				</div>
-				<form action="">
-					<div class="form-group col-4">
-						<label for="">Select Your Review</label>
-						<select name="" id="" class="form-control" style="min-width: 150px">
-							<option value="1">1 Star</option>
-							<option value="2">2 Star</option>
-							<option value="3">3 Star</option>
-							<option value="4">4 Star</option>
-							<option value="5">5 Star</option>
-							
-						</select>
+					<input type="hidden" value="{{ $single_product->id }}" name="product_id">
+				<div class="form-group col-3">
+					<label for="">Select Your Review</label>
+					<select name="rating" id="" class="form-control" style="min-width: 150px">
+						<option value="1">1 Star</option>
+						<option value="2">2 Star</option>
+						<option value="3">3 Star</option>
+						<option value="4">4 Star</option>
+						<option value="5">5 Star</option>	
+					</select>
+						@error('rating')
+							<div class="alert alert-danger">
+                                <div class="alert-body">
+                                    {{ $message }}
+                                </div>
+                            </div>
+						@enderror
 						@if (Auth::check())
 							<button type="submit" class="btn btn-primary
 								mt-2">Submit</button>
 							@else
 							<p>Please Login First For Review Product</p>
 						@endif
-						
 					</div>
-				</form>	
+			</div>
+		</form>	
+	</div>
+
+	{{-- all Review of This Product --}}
+
+	<div class="row">
+		<div class="col-lg-4 card offset-1">
+			<div class="card-header">
+				fdsf
+			</div>
+			<div class="card-body">
+				sdfdsf
 			</div>
 		</div>
-		
+		<div class="col-lg-4 card offset-1">
+			<div class="card-header">
+				fdsf
+			</div>
+			<div class="card-body">
+				sdfdsf
+			</div>
+		</div>
 	</div>
+
+
 
 	<!-- Recently Viewed -->
 
