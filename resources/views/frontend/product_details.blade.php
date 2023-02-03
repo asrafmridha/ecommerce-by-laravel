@@ -1,16 +1,3 @@
-{{-- @php
-	$dataArr = is_array($single_product->images) ? $dataArr : array($single_product->images);
-	foreach ($dataArr as  $value) {
-		$a[]=$value;
-	}
-	dd($a);
-@endphp --}}
-
-@section('css')
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-@endsection
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +13,17 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/animate.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_styles.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('frontend/styles/product_responsive.css') }}">
+
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 
 </head>
@@ -140,10 +138,13 @@
 
 								</div>
 
-								<div class="product_price">$2000</div>
+								<div class="product_price">{{ generalSetting()->currency }} {{ $single_product->selling_price }}</div>
 								<div class="button_container">
-									<button type="button" class="button cart_button">Add to Cart</button>
-									<div class="product_fav"><i class="fas fa-heart"></i></div>
+									<div class="input-group mb-3">
+										<button type="button" class="btn btn-outline-info" type="su
+										">Add to Cart</button>
+										<a href="{{ route('add.wishlist',$single_product->id) }}" class="btn btn-outline-primary">Add to Wishlist</a>
+									</div>
 								</div>
 							</form>
 						</div>
@@ -463,6 +464,46 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{ asset('frontend/plugins/OwlCarousel2-2.2.1/owl.carousel.js') }}"></script>
 <script src="{{ asset('frontend/plugins/easing/easing.js') }}"></script>
 <script src="{{ asset('frontend/js/product_custom.js') }}"></script>
+
+<script>
+  @if(Session::has('message'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.success("{{ session('message') }}");
+  @endif
+
+  @if(Session::has('error'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.error("{{ session('error') }}");
+  @endif
+
+  @if(Session::has('info'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.info("{{ session('info') }}");
+  @endif
+
+  @if(Session::has('warning'))
+  toastr.options =
+  {
+  	"closeButton" : true,
+  	"progressBar" : true
+  }
+  		toastr.warning("{{ session('warning') }}");
+  @endif
+</script>
+
+
 </body>
 
 </html>
