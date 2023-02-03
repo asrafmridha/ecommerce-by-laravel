@@ -1,3 +1,5 @@
+
+
 <header class="header">
 
 		<!-- Top Bar -->
@@ -9,13 +11,18 @@
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005 3570</div>
 						<div class="top_bar_contact_item"><div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a></div>
 						<div class="top_bar_content ml-auto">
+
+							@if (Auth::check())
 							<div class="top_bar_menu">
 								<ul class="standard_dropdown top_bar_dropdown">
 									<li>
-										<a href="#">English<i class="fas fa-chevron-down"></i></a>
+										
+										<a href="#">{{ Auth::user()->name }}<i class="fas fa-chevron-down"></i></a>
 										<ul>
-											<li><a href="#">English</a></li>
-											<li><a href="#">Bangla</a></li>
+											<li><a href="#">Profile</a></li>
+											<li><a href="#">Setting</a></li>
+											<li><a href="#">Order List</a></li>
+											<li><a href="{{ route('customer.logout') }}">Log Out</a></li>
 										</ul>
 									</li>
 									<li>
@@ -28,11 +35,15 @@
 									</li>
 								</ul>
 							</div>
+							@endif
+							@guest
+
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="images/user.svg" alt=""></div>
 								<div><a href="{{ route('register') }}">Register</a></div>
 								<div><a href="{{ route('login') }}">Sign in</a></div>
 							</div>
+							@endguest
 						</div>
 					</div>
 				</div>
@@ -81,13 +92,20 @@
 					</div>
 
 					<!-- Wishlist -->
+					@php
+					$wishlist=0;
+					if(Auth::check()){
+						$wishlist=DB::table('wishlists')->where('user_id',Auth::user()->id)->count();
+					}	
+					@endphp
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
 								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
 								<div class="wishlist_content">
 									<div class="wishlist_text"><a href="#">Wishlist</a></div>
-									<div class="wishlist_count">115</div>
+									
+									<div class="wishlist_count">{{ $wishlist }}</div>
 								</div>
 							</div>
 
