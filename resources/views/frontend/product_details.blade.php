@@ -88,7 +88,7 @@
 							
 											<div class="col-lg-6">
 												<label for="">Size</label>
-												<select name="size" id="" class="form-control form-control-sm">
+												<select name="size" id="" class="form-control form-control-sm" style="min-width: 100px">
 													@foreach ($sizes as $size)
 													<option value="">{{ $size }}</option>
 													@endforeach
@@ -98,7 +98,8 @@
 										@isset($single_product->color)	
 											<div class="col-lg-6">
 												<label for="">Color</label>
-												<select name="size" id="" class="form-control form-control-sm">
+												<select name="size" id="" class="form-control form-control-sm"
+												style="min-width: 100px">
 													@foreach($colors as $color)
 													<option value="">{{ $color }}</option>
 													@endforeach
@@ -164,6 +165,38 @@
 				</div>
 			</div>
 		</div>
+		<div class="row container">
+			<div class="col-5 offset-3">
+				dfgfdgdf
+			</div>
+			<div class="col-lg-1">
+				<div class="form-group">
+					<label for="details">Write Your Review</label>
+					<textarea name="" id="" cols="30" rows="5"></textarea>
+				</div>
+				<form action="">
+					<div class="form-group col-4">
+						<label for="">Select Your Review</label>
+						<select name="" id="" class="form-control" style="min-width: 150px">
+							<option value="1">1 Star</option>
+							<option value="2">2 Star</option>
+							<option value="3">3 Star</option>
+							<option value="4">4 Star</option>
+							<option value="5">5 Star</option>
+							
+						</select>
+						@if (Auth::check())
+							<button type="submit" class="btn btn-primary
+								mt-2">Submit</button>
+							@else
+							<p>Please Login First For Review Product</p>
+						@endif
+						
+					</div>
+				</form>	
+			</div>
+		</div>
+		
 	</div>
 
 	<!-- Recently Viewed -->
