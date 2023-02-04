@@ -9,6 +9,9 @@
 <meta name="description" content="OneTech shop project">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+@yield('home')
+
+
 @include('frontend.include.css')
 
 
@@ -286,16 +289,19 @@
 							</div>
 
 							<!-- Product Panel -->
-							<div class="product_panel panel active">
+							{{-- <div class="product_panel panel active">
+							@foreach ($featured as $featured)
 								<div class="featured_slider slider">
 										<!-- Slider Item -->
+								
 									<div class="featured_slider_item">
 										<div class="border_active"></div>
 										<div class="product_item d-flex flex-column align-items-center justify-content-center text-center">
-											<div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="images/featured_7.png" alt=""></div>
+											<div class="product_image d-flex flex-column align-items-center justify-content-center">
+												<img src="{{ asset('uploads/product/'.$featured->thumbnails) }}" alt="" height="100%" width="100%"></div>
 											<div class="product_content">
-												<div class="product_price">$379</div>
-												<div class="product_name"><div><a href="product.html">Huawei MediaPad...</a></div></div>
+												<div class="product_price">{{ generalSetting()->currency }} {{ $featured->selling_price }}</div>
+												<div class="product_name"><div><a href="product.html">{{ $featured->name }}</a></div></div>
 												<div class="product_extras">
 													<div class="product_color">
 														<input type="radio" checked name="product_color" style="background:#b19c83">
@@ -312,9 +318,31 @@
 											</ul>
 										</div>
 									</div>
+								
+
 								</div>
+							@endforeach
 								<div class="featured_slider_dots_cover"></div>
-							</div>
+							</div> --}}
+								<!-- Slider Item -->
+							<form action="{{ route('add.cart') }}"  id="cartform" method="POST">
+								@csrf
+								@foreach ($featured as $featured)
+								<div class="featured_slider_item">
+								
+									<a href="{{ route('add.wishlist',$featured->id) }}"><img src="{{ asset('uploads/product/'.$featured->thumbnails) }}" alt="" height="100px" width="120px">wishlist</a>
+
+									<input type="hidden" value="{{ $featured->id }}" name="id">
+									<input type="hidden" value="{{ $featured->name }}" name="name">
+										
+										<div class="product_name"><div>
+											<a href="product.html">{{ $featured->name }}</a></div></div>
+											<button class="m-1" id="">Add to Cart</button>
+											<button class="btn btn-info">Quickview</button>
+								</div>
+								@endforeach
+							</form>	
+								</div>
 						</div>
 					</div>
 
@@ -2972,6 +3000,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 @include('frontend.include.script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script>
+		$(document).ready(function () {
+			$("#cartform").on('submit',function(){
+               var formData = new FormData($(this)[0]);
+			//    console.log(formData);
+			var url =$(this).attr('action');
+			   $.ajax({
+				type: "POST",
+				url: url,
+				data: formData,
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					toastr.success(response.success);
+				}
+			   });
+			});
+			
+		});
+		
+	</script>
 
 
 </body>

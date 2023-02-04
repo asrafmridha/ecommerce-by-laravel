@@ -15,8 +15,12 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
+use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\WishlistController;
 use App\Models\ChildCategory;
 use App\Models\Pickuppoint;
 use App\Models\SubCategory;
@@ -46,10 +50,14 @@ use Illuminate\Support\Facades\Session;
 //     })->name('dashboard');
 // });
 
-//   For Admin or user check
-
+// For Frontend Controller 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('product/details/{slug}', [ProductController::class, 'product_details'])->name('product.details');
+Route::get('customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
+Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
+Route::post('add/cart', [CartController::class, 'addCart'])->name('add.cart');
 
+Route::get('add/wishlist/{id}', [WishlistController::class, 'wishlist'])->name('add.wishlist');
 // for localization 
 Route::get('locale/{locale}', function ($locale) {
   Session::put('locale', $locale);
@@ -100,6 +108,7 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
   //Product Route 
 
   Route::resource('product', ProductController::class);
+
 
   //Theme Color
   Route::get('theme-color', [ThemeSettingController::class, 'color'])->name('theme.color');
