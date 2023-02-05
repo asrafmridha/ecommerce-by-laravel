@@ -13,6 +13,8 @@ class FrontendController extends Controller
     {
         $banner_product = Product::where('status', 'on')->latest()->first();
         $categorires = Category::all();
-        return view('frontend.home', compact('categorires', 'banner_product'));
+        $featured = Product::where('featured', 'on')->where('status', 'on')->orderBy('id','DESC')->limit(8)->get();
+
+        return view('frontend.home', compact('categorires', 'banner_product', 'featured'));
     }
 }

@@ -114,11 +114,11 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span> {{ Cart::count() }} </span></div>
+										<div class="cart_count"><span class="cart_qty">{{ Cart::count() }}  </span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">{{ generalSetting()->currency }}{{ Cart::total() }}</div>
+										<div class="cart_text"><a href="{{ route('cart.details') }}">Cart</a></div>
+										<div class="cart_price">{{ generalSetting()->currency }}{{ Cart::total() }} <span class="cart_total"></span></div>
 									</div>
 								</div>
 							</div>
@@ -217,3 +217,33 @@
 		</div>
 
 	</header>
+
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script>
+
+		// function cartDetails () {
+		
+		//   }
+		$(document).ready(function () {
+			alert('hlw');
+				$.ajax({
+					alert('hlw');
+				type: "GET",
+				url: {{ route('all.cart') }},
+				dataType: "JSON",
+				async: false,
+				success: function (response) {
+					alert('hlw');
+					$('.cart_qty').append(response.cart_qty);
+					$('.cart_total').append(response.cart_total);
+					toastr.success(response.success);
+					
+				}
+			   });
+			});
+			
+		
+		
+	</script>

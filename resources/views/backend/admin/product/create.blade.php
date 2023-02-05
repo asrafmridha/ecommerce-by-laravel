@@ -114,8 +114,8 @@
 
                         <div class="col-8 mt-2">
                             <label class="h5" for="color">Color</label>
-                            <select name="color" id="" class="form-control">
-                                <option >==Select Color==</option>
+                            <select name="color" id="" class="form-control" multiple>
+                                <option disabled >==Select Color==</option>
                                 <option value="yellow">yellow</option>
                                 <option value="red">Red</option>
                             </select>
@@ -324,6 +324,7 @@
                     dataType: "JSON",
                     success: function (response) {
                         $.each(response.data, function (key, data) { 
+                            $("#childcategory_id").empty();
                              $('#childcategory_id').append('<option value="'+data.id+'">'+data.childcategory_name+'</option>');
                              
                         });    

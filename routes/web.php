@@ -56,6 +56,12 @@ Route::get('product/details/{slug}', [ProductController::class, 'product_details
 Route::get('customer/logout', [CustomerController::class, 'logout'])->name('customer.logout');
 Route::post('review/store', [ReviewController::class, 'store'])->name('review.store');
 Route::post('add/cart', [CartController::class, 'addCart'])->name('add.cart');
+Route::get('all/cart', [CartController::class, 'allcart'])->name('all.cart');
+Route::get('cart/details', [CartController::class, 'cartDetails'])->name('cart.details');
+
+Route::get('cart/destroy',function(){
+  Cart::destroy();
+});
 
 Route::get('add/wishlist/{id}', [WishlistController::class, 'wishlist'])->name('add.wishlist');
 // for localization 

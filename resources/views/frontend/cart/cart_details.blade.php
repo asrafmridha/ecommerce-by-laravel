@@ -53,6 +53,10 @@
                                                 <div class="cart_item_title">Total</div>
                                                 <div class="cart_item_text">$2000</div>
                                             </div>
+                                              <div class="cart_item_total cart_info_col">
+                                                <div class="cart_item_title">Action</div>
+                                                <div class="cart_item_text"><a href="">X</a></div>
+                                            </div>
                                         </div>
                                     </li>
                                 @endforeach

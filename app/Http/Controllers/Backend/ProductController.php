@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Pickuppoint;
 use App\Models\Product;
+use App\Models\Review;
 use App\Models\SubCategory;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
@@ -183,6 +184,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::find($id)->delete();
+        product::count('id');
         return back()->withSuccess('Product Delete Successfully');
     }
 
@@ -212,7 +214,8 @@ class ProductController extends Controller
         $banner_product = Product::where('status', 'on')->latest()->first();
         $categorires = Category::all();
         $single_product = Product::where('slug', $slug)->first();
-        $related_product = DB::table('products')->where('subcategory_id', $single_product->subcategory_id)->orderBy('id', 'DESC')->take(10)->get();
-        return view('frontend.product_details', compact('single_product', 'banner_product', 'categorires'));
+        $related_products = DB::table('products')->where('subcategory_id', $single_product->subcategory_id)->orderBy('id', 'DESC')->take(10)->get();
+        $reviews = Review::where('product_id', $single_product->id)->get();
+        return view('frontend.product_details', compact('single_product', 'banner_product', 'categorires', 'related_products', 'reviews'));
     }
 }
