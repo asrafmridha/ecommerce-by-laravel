@@ -59,7 +59,9 @@ Route::post('add/cart', [CartController::class, 'addCart'])->name('add.cart');
 Route::get('all/cart', [CartController::class, 'allcart'])->name('all.cart');
 Route::get('cart/details', [CartController::class, 'cartDetails'])->name('cart.details');
 
-Route::get('cart/destroy',function(){
+Route::get('cart/remove/{rowId}', [CartController::class, 'cart_remove'])->name('cart.remove');
+
+Route::get('cart/destroy', function () {
   Cart::destroy();
 });
 

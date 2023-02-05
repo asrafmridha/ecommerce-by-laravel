@@ -45,4 +45,10 @@ class CartController extends Controller
         // return response()->json($cartDetails);
         return view('frontend.cart.cart_details', compact('categorires', 'cartDetails'));
     }
+
+    public function cart_remove($rowId)
+    {
+        Cart::remove($rowId);
+        return back();
+    }
 }

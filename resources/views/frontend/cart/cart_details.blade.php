@@ -21,7 +21,6 @@
 
 	<div class="cart_section">
 		<div class="container">
-            
                 <div class="row">
                     <div class="col-lg-10 offset-lg-1">
                         <div class="cart_container">
@@ -55,7 +54,7 @@
                                             </div>
                                               <div class="cart_item_total cart_info_col">
                                                 <div class="cart_item_title">Action</div>
-                                                <div class="cart_item_text"><a href="">X</a></div>
+                                                <div class="cart_item_text"><a href="{{ route('cart.remove',$details->rowId) }}">X</a></div>
                                             </div>
                                         </div>
                                     </li>
@@ -74,19 +73,12 @@
                         </div>
                     </div>
                 </div>
-            
 		</div>
 	</div>
 
 	<!-- Newsletter -->
 
 	<!-- Footer -->
-
-	
-
-	
-
-
 <script src="{{ asset('frontend/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('frontend/styles/bootstrap4/popper.js') }}"></script>
 <script src="{{ asset('frontend/styles/bootstrap4/bootstrap.min.js') }}"></script>
