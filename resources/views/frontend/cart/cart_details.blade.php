@@ -50,7 +50,7 @@
                                             </div>
                                             <div class="cart_item_total cart_info_col">
                                                 <div class="cart_item_title">Total</div>
-                                                <div class="cart_item_text">$2000</div>
+                                                <div class="cart_item_text">{{ $details->subtotal }}</div>
                                             </div>
                                               <div class="cart_item_total cart_info_col">
                                                 <div class="cart_item_title">Action</div>
@@ -63,9 +63,7 @@
                             
                             </div>
 
-                            @php
-                                
-                            @endphp
+ 
                             
                             <!-- Order Total -->
                        
@@ -82,7 +80,7 @@
                                 <div class="row">
                                     <div class="col-md-12 bg-light text-right">
                                         <a href="{{ route('cart.remove.all') }}" class="btn btn-primary">Cart clear</a>
-                                        <a type="button" class="btn btn-warning">Checkout</a>
+                                        <a href="{{ route('checkout') }}" class="btn btn-warning">Checkout</a>
                                     </div>
                                 </div>
                             </div>
