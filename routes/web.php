@@ -61,9 +61,11 @@ Route::get('cart/details', [CartController::class, 'cartDetails'])->name('cart.d
 
 Route::get('cart/remove/{rowId}', [CartController::class, 'cart_remove'])->name('cart.remove');
 
-Route::get('cart/destroy', function () {
-  Cart::destroy();
-});
+Route::get('cart/destroy', [CartController::class, 'cart_remove_all'])->name('cart.remove.all');
+
+// Route::get('cart/destroy', function () {
+//   Cart::destroy();
+// });
 
 Route::get('add/wishlist/{id}', [WishlistController::class, 'wishlist'])->name('add.wishlist');
 // for localization 

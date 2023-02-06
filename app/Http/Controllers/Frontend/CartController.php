@@ -17,12 +17,12 @@ class CartController extends Controller
 
         $product = Product::where('id', $request->id)->first();
         Cart::add([
-            'id'    => $product->id,
-            'name'  => $product->name,
-            'qty'   => 1,
-            'price' => $product->selling_price,
-            'weight' => 1,
-            'options' => ['thumnails' => $product->thumbnails],
+            'id'        => $product->id,
+            'name'      => $product->name,
+            'qty'       => 1,
+            'price'     => $product->selling_price,
+            'weight'    => 1,
+            'options'   => ['thumnails' => $product->thumbnails],
 
         ]);
         return back()->withSuccess("Added Cart Successfully");
@@ -49,6 +49,13 @@ class CartController extends Controller
     public function cart_remove($rowId)
     {
         Cart::remove($rowId);
+        return back();
+    }
+
+    public function cart_remove_all()
+    {
+    
+        Cart::destroy();
         return back();
     }
 }

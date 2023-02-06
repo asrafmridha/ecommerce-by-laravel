@@ -75,9 +75,18 @@
                                     <div class="order_total_amount">{{ Cart::total() }}</div>
                                 </div>
                             </div>
-                            @if(Cart::total()!=0)
-                            <a class="btn btn-info" href="">Checkout</a>
-                            @endif
+                            
+                           
+                        @if(Cart::total()!=0)
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12 bg-light text-right">
+                                        <a href="{{ route('cart.remove.all') }}" class="btn btn-primary">Cart clear</a>
+                                        <a type="button" class="btn btn-warning">Checkout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                         </div>
                     </div>
                 </div>
