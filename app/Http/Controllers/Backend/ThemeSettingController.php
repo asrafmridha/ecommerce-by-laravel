@@ -36,7 +36,7 @@ class ThemeSettingController extends Controller
     public function toggle()
     {
         $data = ThemeSetting::where('user_id', Auth::id())->first();
-
+                 
 
         if ($data->nav == 'expanded') {
             $data->nav = 'collapsed';

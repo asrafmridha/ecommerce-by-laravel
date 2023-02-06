@@ -54,7 +54,7 @@ class CartController extends Controller
 
     public function cart_remove_all()
     {
-    
+
         Cart::destroy();
         return back();
     }
