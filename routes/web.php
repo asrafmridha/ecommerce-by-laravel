@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\SmtpController;
 use App\Http\Controllers\Backend\ThemeSettingController;
 use App\Http\Controllers\Backend\WarehouseController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ReviewController;
@@ -62,6 +63,7 @@ Route::get('cart/details', [CartController::class, 'cartDetails'])->name('cart.d
 Route::get('cart/remove/{rowId}', [CartController::class, 'cart_remove'])->name('cart.remove');
 
 Route::get('cart/destroy', [CartController::class, 'cart_remove_all'])->name('cart.remove.all');
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();
