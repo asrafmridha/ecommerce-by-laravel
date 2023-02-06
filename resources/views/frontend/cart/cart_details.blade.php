@@ -62,14 +62,22 @@
                                 </ul>
                             
                             </div>
+
+                            @php
+                                
+                            @endphp
                             
                             <!-- Order Total -->
+                       
                             <div class="order_total">
                                 <div class="order_total_content text-md-right">
                                     <div class="order_total_title">Order Total:</div>
-                                    <div class="order_total_amount">{{ $details->subtotal }}</div>
+                                    <div class="order_total_amount">{{ Cart::total() }}</div>
                                 </div>
                             </div>
+                            @if(Cart::total()!=0)
+                            <a class="btn btn-info" href="">Checkout</a>
+                            @endif
                         </div>
                     </div>
                 </div>
