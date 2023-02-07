@@ -95,6 +95,12 @@
                             @csrf
 
                             <div class="p-4">
+                                @if(Session::has('error'))
+                                    <p class="alert alert-info">{{ Session::get('error') }}</p>
+                                @endif
+                                @if(Session::has('success'))
+                                    <p class="alert alert-info">{{ Session::get('success') }}</p>
+                                @endif
                                 <label for="">Coupon Apply</label>
                                 <input type="text" class="form-control" name="coupon" placeholder="Coupon Code">
                                 <div class="form-group mt-2">

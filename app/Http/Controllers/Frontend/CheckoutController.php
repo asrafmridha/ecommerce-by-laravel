@@ -40,10 +40,10 @@ class CheckoutController extends Controller
             if (Carbon::now()->format('Y-m-d') <= date('Y-m-d', strtotime($check->valid_date))) {
                 echo 'done';
             } else {
-                echo 'old Coupon';
+                return back()->with('error', 'Date Expired!');
             }
         } else {
-            dd('fail');
+            return back()->with('error', 'Invalid Coupon!');
         }
     }
 }
