@@ -87,17 +87,16 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
-                        <label for="">Subtotal:</label>
+                        <label for="">Subtotal: {{ Cart::subtotal() }} {{ generalSetting()->currency }}</label>
                         <label for="">Coupon:</label>
                         <label for="">Tax:</label>
-                        
-                        
-                        <form action="">
+
+                        <form action="{{ route('apply.coupon') }}" method="POST">
+                            @csrf
 
                             <div class="p-4">
                                 <label for="">Coupon Apply</label>
                                 <input type="text" class="form-control" name="coupon" placeholder="Coupon Code">
-
                                 <div class="form-group mt-2">
                                     <button type="submit" class="btn btn-info">Apply</button>
                                 </div>

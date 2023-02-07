@@ -65,6 +65,8 @@ Route::get('cart/remove/{rowId}', [CartController::class, 'cart_remove'])->name(
 Route::get('cart/destroy', [CartController::class, 'cart_remove_all'])->name('cart.remove.all');
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
+Route::post('apply/coupon', [CheckoutController::class, 'apply_coupon'])->name('apply.coupon');
+
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();
 // });
