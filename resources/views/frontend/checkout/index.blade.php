@@ -20,7 +20,6 @@
 	<!-- Cart -->
 
 	<div class="cart_section">
-        
 		<div class="container">
             <div class="row">
                 <div class="col-lg-8">
@@ -75,8 +74,6 @@
                                         <label for="">Hand Cash</label>
                                         <input type="radio" class="form-control" name="payment_type">
                                     </div>
-
-
                                 </div>
                             </div>
                             <div class="form-group ml-3">
@@ -103,10 +100,12 @@
                                 @endif
                                 <label for="">Coupon Apply</label>
                                 <input type="text" class="form-control" name="coupon" placeholder="Coupon Code">
+                                @error('coupon')
+                                <span class="text text-danger">{{ $message }}</span>
+                                @enderror
                                 <div class="form-group mt-2">
                                     <button type="submit" class="btn btn-info">Apply</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
