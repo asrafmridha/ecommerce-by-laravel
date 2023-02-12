@@ -85,7 +85,9 @@
                 <div class="col-lg-4">
                     <div class="card">
                         <label for="">Subtotal: {{ Cart::subtotal() }} {{ generalSetting()->currency }}</label>
-                        <label for="">Coupon:</label>
+                    @if(Session::has('coupon'))    
+                        <label for="">Coupon: {{ Session::get('coupon')['name'] }}  </label>
+                    @endif    
                         <label for="">Tax:</label>
                     @if(!Session::has('coupon'))
                         <form action="{{ route('apply.coupon') }}" method="POST">
