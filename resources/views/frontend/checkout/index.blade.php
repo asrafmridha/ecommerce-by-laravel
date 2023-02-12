@@ -89,7 +89,7 @@
                         <label for="">Coupon: {{ Session::get('coupon')['name'] }}
                         <a href="">X</a> <span style="float:right; padding-right:5px">Discount : {{ Session::get('coupon')['discount'] }}</span> </label>  
                     @endif    
-                        <label for="">Tax:</label>
+                        <label for="">Total: {{ Session::get('coupon')['after_discount'] }}</label>
                     @if(!Session::has('coupon'))
                         <form action="{{ route('apply.coupon') }}" method="POST">
                             @csrf
