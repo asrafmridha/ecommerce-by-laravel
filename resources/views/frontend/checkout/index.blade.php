@@ -87,7 +87,7 @@
                         <label for="">Subtotal: {{ Cart::subtotal() }} {{ generalSetting()->currency }}</label>
                         <label for="">Coupon:</label>
                         <label for="">Tax:</label>
-
+                    @if(!Session::has('coupon'))
                         <form action="{{ route('apply.coupon') }}" method="POST">
                             @csrf
 
@@ -108,6 +108,7 @@
                                 </div>
                             </div>
                         </form>
+                    @endif
                     </div>
                  
                 </div>

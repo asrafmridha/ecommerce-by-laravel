@@ -9,6 +9,8 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Cart;
 use Carbon\Carbon;
+use Session;
+
 
 class CheckoutController extends Controller
 {
@@ -28,7 +30,17 @@ class CheckoutController extends Controller
 
     public function apply_coupon(Request $request)
     {
+        $request->validate([
+
+            'coupon' => 'required',
+        ]);
+
+        // dd((int)Cart::subtotal());
+
+
+
         $check = Cupon::where('cupon_code', $request->coupon)->first();
+        // dd(Cart::subtotal() - ($check->cupon_amount));
         if ($check) {
             // if (date('Y-m-d', strtotime(date('Y-m-d'))) <= date('Y-m-d', strtotime($check->valid_date))) {
             //     echo 'done';
@@ -38,7 +50,11 @@ class CheckoutController extends Controller
             // dd(Carbon::now()->format('Y-m-d'));
 
             if (Carbon::now()->format('Y-m-d') <= date('Y-m-d', strtotime($check->valid_date))) {
-                echo 'done';
+                session::put('coupon', [
+                    'name'              => $check->cupon_code,
+                    'discount'          => $check->cupon_amount,
+                    'after_discount'    => Cart::subtotal() - $check->cupon_amount,
+                ]);
             } else {
                 return back()->with('error', 'Date Expired!');
             }
