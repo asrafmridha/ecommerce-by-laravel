@@ -67,6 +67,8 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout
 
 Route::post('apply/coupon', [CheckoutController::class, 'apply_coupon'])->name('apply.coupon');
 
+Route::get('coupon/remove',[CheckoutController::class, 'coupon_remove'])->name('coupon.remove');
+
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();
 // });

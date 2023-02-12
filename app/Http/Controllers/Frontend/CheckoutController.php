@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Cart;
 use Carbon\Carbon;
+use PhpOffice\PhpSpreadsheet\Calculation\MathTrig\Subtotal;
 use Session;
 
 
@@ -40,7 +41,6 @@ class CheckoutController extends Controller
 
 
         $check = Cupon::where('cupon_code', $request->coupon)->first();
-        // dd(Cart::subtotal() - ($check->cupon_amount));
         if ($check) {
             // if (date('Y-m-d', strtotime(date('Y-m-d'))) <= date('Y-m-d', strtotime($check->valid_date))) {
             //     echo 'done';
@@ -55,11 +55,18 @@ class CheckoutController extends Controller
                     'discount'          => $check->cupon_amount,
                     'after_discount'    => Cart::subtotal() - $check->cupon_amount,
                 ]);
+                return back();
             } else {
                 return back()->with('error', 'Date Expired!');
             }
         } else {
             return back()->with('error', 'Invalid Coupon!');
         }
+    }
+
+    public function coupon_remove()
+    {
+        session::forget('coupon');
+        return back();
     }
 }
