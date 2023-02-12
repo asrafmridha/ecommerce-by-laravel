@@ -86,7 +86,8 @@
                     <div class="card">
                         <label for="">Subtotal: {{ Cart::subtotal() }} {{ generalSetting()->currency }}</label>
                     @if(Session::has('coupon'))    
-                        <label for="">Coupon: {{ Session::get('coupon')['name'] }}  </label>
+                        <label for="">Coupon: {{ Session::get('coupon')['name'] }}
+                        <a href="">X</a> <span style="float:right; padding-right:5px">Discount : {{ Session::get('coupon')['discount'] }}</span> </label>  
                     @endif    
                         <label for="">Tax:</label>
                     @if(!Session::has('coupon'))
