@@ -25,7 +25,8 @@
                 <div class="col-lg-8">
                     <div class="cart_container card p-1">
                         <div class="cart_title text-center">Billing Address</div>
-                        <form action="">
+                        <form action="{{ route('order.place') }}" method="POST">
+                            @csrf
                             <div class="row p-4">
                                 <div class="form-group col-lg-6">
                                     <label for="">Customer Name</label>
@@ -63,16 +64,16 @@
                                 <div class="row ml-5">
                                     <div class="form-group col-lg-4 ">
                                         <label for="">Paypal</label>
-                                        <input type="radio" class="form-control mt-1" name="payment_type">
+                                        <input type="radio" class="form-control mt-1" name="payment_type" value="Paypal">
                                     </div>
                                      <div class="form-group col-lg-4">
                                         <label for="">SSL COMMERZ</label>
-                                        <input type="radio" class="form-control" name="payment_type">
+                                        <input type="radio" class="form-control" name="payment_type" value="SSL COMMERZ">
                                     </div>
 
                                      <div class="form-group col-lg-4">
                                         <label for="">Hand Cash</label>
-                                        <input type="radio" class="form-control" name="payment_type">
+                                        <input type="radio" class="form-control" value="Hand Cash" name="payment_type">
                                     </div>
                                 </div>
                             </div>

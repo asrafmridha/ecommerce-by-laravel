@@ -19,6 +19,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\OrderController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\WishlistController;
@@ -67,7 +68,9 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout
 
 Route::post('apply/coupon', [CheckoutController::class, 'apply_coupon'])->name('apply.coupon');
 
-Route::get('coupon/remove',[CheckoutController::class, 'coupon_remove'])->name('coupon.remove');
+Route::get('coupon/remove', [CheckoutController::class, 'coupon_remove'])->name('coupon.remove');
+
+Route::post('order/place', [OrderController::class, 'order_place'])->name('order.place');
 
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();
