@@ -34,6 +34,9 @@ return new class extends Migration
             $table->string('shipping_cost', 5)->nullable();
             $table->string('order_id', 25)->nullable();
             $table->integer('status')->default(0);
+            $table->string('date')->nullable();
+            $table->string('month')->nullable();
+            $table->string('year')->nullable();
             $table->timestamps();
         });
     }
