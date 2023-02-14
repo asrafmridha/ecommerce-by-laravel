@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Order_detail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -50,7 +52,7 @@ class OrderController extends Controller
         $order_id = Order::insertGetId($order);
 
         Mail::to($request->email)->send(new InvoiceMail($order));
-        
+
         $contents = Cart::content();
 
 
@@ -70,5 +72,15 @@ class OrderController extends Controller
         }
 
         return redirect()->route('home')->withSuccess('Order Placed Successfully');
+    }
+
+    public function order_list()
+    {
+
+        $banner_product = Product::where('status', 'on')->latest()->first();
+        $categorires = Category::all();
+        $featured = Product::where('featured', 'on')->where('status', 'on')->orderBy('id', 'DESC')->limit(8)->get();
+        $orders = DB::table('orders')->orderBy('id', 'DESC')->take(10)->get();
+        return view('frontend.order.index', compact('categorires', 'banner_product', 'featured', 'orders'));
     }
 }

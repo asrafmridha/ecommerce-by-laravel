@@ -60,17 +60,14 @@ Route::post('review/store', [ReviewController::class, 'store'])->name('review.st
 Route::post('add/cart', [CartController::class, 'addCart'])->name('add.cart');
 Route::get('all/cart', [CartController::class, 'allcart'])->name('all.cart');
 Route::get('cart/details', [CartController::class, 'cartDetails'])->name('cart.details');
-
 Route::get('cart/remove/{rowId}', [CartController::class, 'cart_remove'])->name('cart.remove');
-
 Route::get('cart/destroy', [CartController::class, 'cart_remove_all'])->name('cart.remove.all');
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-
 Route::post('apply/coupon', [CheckoutController::class, 'apply_coupon'])->name('apply.coupon');
-
 Route::get('coupon/remove', [CheckoutController::class, 'coupon_remove'])->name('coupon.remove');
-
 Route::post('order/place', [OrderController::class, 'order_place'])->name('order.place');
+
+Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
 
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();

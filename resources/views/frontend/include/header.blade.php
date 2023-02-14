@@ -21,7 +21,7 @@
 										<ul>
 											<li><a href="#">Profile</a></li>
 											<li><a href="#">Setting</a></li>
-											<li><a href="#">Order List</a></li>
+											<li><a href="{{ route('order.list') }}">Order List</a></li>
 											<li><a href="{{ route('customer.logout') }}">Log Out</a></li>
 										</ul>
 									</li>
