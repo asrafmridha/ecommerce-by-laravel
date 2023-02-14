@@ -14,7 +14,49 @@
 <body>
     @include('frontend.include.header')
 
-    <div class="container">
+    <div class="container mt-5">
+        <div class="row m-3">
+            <div class="col-lg-3">
+                <a href="">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-success">Total Order</h5>
+                            <div class="card-subtitle mb-2 text-muted text-center">{{ $total_orders }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Complete Order</h5>
+                            <div class="card-subtitle mb-2 text-muted text-center">{{ $complete_orders }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Cancel Order</h5>
+                            <div class="card-subtitle mb-2 text-muted text-center">{{ $cancel_orders }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-3">
+                <a href="">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Return Order</h5>
+                            <div class="card-subtitle mb-2 text-muted text-center">{{ $return_orders }}</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +74,7 @@
                        <td>{{ $loop->index+1 }}</td>
                         <td>{{ $item->order_id }}</td>
                         <td>{{ date('d F, Y') }}</td>
-                        <td><?php echo $item->total ?></td>
+                        <td>{{ $item->total }} {{ generalSetting()->currency  }}</td>
                         <td><?php echo $item->payment_type ?></td>
                         <td>
                             @if($item->status==0)
@@ -48,9 +90,6 @@
                                 @else
                                     <button class="btn btn-danger">Order Cancel</button>                   
                             @endif    
-
-
-
                         </td>
                     </tr>
                 @endforeach
