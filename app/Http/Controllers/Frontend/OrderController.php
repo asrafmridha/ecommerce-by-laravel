@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use App\Models\Order;
 use App\Models\Order_detail;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use Cart;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -20,8 +22,6 @@ class OrderController extends Controller
 
     public function order_place(Request $request)
     {
-        // dd($request->all());
-
         $order = array();
         // dd('hlw');
         $order['user_id']     = Auth::user()->id;
@@ -48,12 +48,17 @@ class OrderController extends Controller
         $order['year'] = date('Y');
         // insertGetId for get id when data save
         $order_id = Order::insertGetId($order);
+
+        Mail::to($request->email)->send(new InvoiceMail($order));
+        
         $contents = Cart::content();
+
 
         $order_details = new Order_detail();
         foreach ($contents as $content) {
             $order_details->order_id = $order_id;
             $order_details->product_id = $content->id;
+            $order_details->product_name = $content->name;
             $order_details->quantity = $content->qty;
             $order_details->single_price = $content->price;
             $order_details->subtotal_price = $content->price * $content->qty;
