@@ -66,8 +66,8 @@ Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout
 Route::post('apply/coupon', [CheckoutController::class, 'apply_coupon'])->name('apply.coupon');
 Route::get('coupon/remove', [CheckoutController::class, 'coupon_remove'])->name('coupon.remove');
 Route::post('order/place', [OrderController::class, 'order_place'])->name('order.place');
-
 Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
+Route::post('order/track', [OrderController::class, 'order_track'])->name('order.track');
 
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();

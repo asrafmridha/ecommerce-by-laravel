@@ -15,6 +15,25 @@
     @include('frontend.include.header')
 
     <div class="container mt-5">
+        <div class="row">    
+            <div class="col-lg-5">
+              <div class="card">
+                @if(Session::has('error_id'))
+                    <span class="btn btn-danger">{{ Session::get('error_id') }}</span>
+                @endif
+                <div class="card-body">
+                    <h4>Order Tracking</h4>
+                    <form action="{{ route('order.track') }}" method="POST">
+                        @csrf
+                        <input type="text" name="order_id" class="form-control" placeholder="Order id">
+                            <button class="btn btn-primary mt-2"  type="submit">Track Now</button>
+                
+                    </form>
+                </div>
+              </div>
+            </div>
+        </div>
+       
         <div class="row m-3">
             <div class="col-lg-3">
                 <a href="">
@@ -66,6 +85,7 @@
                 <th scope="col">Total</th>
                 <th scope="col">Payment Status</th>
                 <th scope="col">Status</th>
+                <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,6 +110,9 @@
                                 @else
                                     <button class="btn btn-danger">Order Cancel</button>                   
                             @endif    
+                        </td>
+                        <td>
+                            <a class="btn btn-success" href="" title="view order"><i class="fa fa-eye"></i></a>
                         </td>
                     </tr>
                 @endforeach

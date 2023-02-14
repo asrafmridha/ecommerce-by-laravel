@@ -87,4 +87,16 @@ class OrderController extends Controller
         $cancel_orders = DB::table('orders')->where('user_id', Auth::user()->id)->where('status', 5)->count();
         return view('frontend.order.index', compact('categorires', 'banner_product', 'featured', 'orders', 'total_orders', 'complete_orders', 'return_orders', 'cancel_orders'));
     }
+
+    public function order_track(Request $request)
+    {
+        $check = DB::table('orders')->where('order_id', $request->order_id)->first();
+        if (!$check) {
+            return back()->with('error_id', 'Invalid Product Id');
+        } else {
+            $categorires = Category::all();
+            $order_details = Order_detail::where('id', $check->id)->get();
+            return view('frontend.order.track_result', compact('categorires', 'order_details', 'check'));
+        }
+    }
 }
