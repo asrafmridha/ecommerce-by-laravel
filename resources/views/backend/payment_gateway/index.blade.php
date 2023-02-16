@@ -60,9 +60,9 @@
                                     @csrf
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="amarpay_gateway_name">Signature Key</label>
-                                                <input type="text" name="amarpay_gateway_name" value="{{ $amarpay->gateway_name }}" id="email" class="form-control" placeholder=""/>
-                                                @error('amarpay_gateway_name')
+                                                <label for="signature_key">Signature Key</label>
+                                                <input type="text" name="signature_key" value="{{ $amarpay->signature_key }}" id="email" class="form-control" placeholder=""/>
+                                                @error('signature_key')
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
@@ -75,6 +75,12 @@
                                                     <small class="text-danger">{{ $message }}</small>
                                                 @enderror
                                             </div>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                Live Server
+                                            </label>
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary waves-effect waves-float waves-light w-100 w-sm-auto">update</button>

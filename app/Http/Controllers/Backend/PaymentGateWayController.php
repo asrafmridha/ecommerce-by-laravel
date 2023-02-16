@@ -21,8 +21,8 @@ class PaymentGateWayController extends Controller
     public function amarpay_update(Request $request, $id)
     {
         $data = [];
-        $data['gateway_name']       = $request->amarpay_gateway_name;
-        $data['store_id']           = $request->amarpay_store_id;
+        $data['signature_key']       = $request->signature_key;
+        $data['store_id']            = $request->amarpay_store_id;
         PaymentGateway::find($id)->update($data);
         return back()->withSuccess("Updated Successfully");
     }

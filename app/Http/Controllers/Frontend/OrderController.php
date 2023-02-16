@@ -24,54 +24,154 @@ class OrderController extends Controller
 
     public function order_place(Request $request)
     {
-        $order = array();
-        // dd('hlw');
-        $order['user_id']     = Auth::user()->id;
-        $order['c_name']     = $request->name;
-        $order['c_phone']     = $request->phone;
-        $order['c_email']    = $request->email;
-        $order['c_country']   = $request->country;
-        $order['c_zipcode']  = $request->zip;
-        $order['c_address']  = $request->address;
-        $order['payment_type'] = $request->payment_type;
-        if (Session::has('coupon')) {
-            $order['total']           = Cart::total();
-            $order['coupon_code']     = Session::get('coupon')['name'];
-            $order['coupon_discount'] = Session::get('coupon')['discount'];
-            $order['after_discount']  = Session::get('coupon')['after_discount'];
-            $order['subtotal']        =    Cart::subtotal();
-        } else {
-            $order['subtotal']       =    Cart::subtotal();
-            $order['total']           =    Cart::total();
+        // dd($request->all());
+        if ($request->payment_type == 'Hand Cash') {
+            $order = array();
+            $order['user_id']     = Auth::user()->id;
+            $order['c_name']     = $request->name;
+            $order['c_phone']     = $request->phone;
+            $order['c_email']    = $request->email;
+            $order['c_country']   = $request->country;
+            $order['c_zipcode']  = $request->zip;
+            $order['c_address']  = $request->address;
+            $order['payment_type'] = $request->payment_type;
+            if (Session::has('coupon')) {
+                $order['total']           = Cart::total();
+                $order['coupon_code']     = Session::get('coupon')['name'];
+                $order['coupon_discount'] = Session::get('coupon')['discount'];
+                $order['after_discount']  = Session::get('coupon')['after_discount'];
+                $order['subtotal']        =    Cart::subtotal();
+            } else {
+                $order['subtotal']       =    Cart::subtotal();
+                $order['total']           =    Cart::total();
+            }
+            $order['order_id'] = rand(00001, 9000000);
+            $order['date'] = date('d-m-Y');
+            $order['month'] = date('F');
+            $order['year'] = date('Y');
+            // insertGetId for get id when data save
+            $order_id = Order::insertGetId($order);
+
+            Mail::to($request->email)->send(new InvoiceMail($order));
+
+            $contents = Cart::content();
+
+
+            $order_details = new Order_detail();
+            foreach ($contents as $content) {
+                $order_details->order_id = $order_id;
+                $order_details->product_id = $content->id;
+                $order_details->product_name = $content->name;
+                $order_details->quantity = $content->qty;
+                $order_details->single_price = $content->price;
+                $order_details->subtotal_price = $content->price * $content->qty;
+                $order_details->save();
+            }
+            Cart::destroy();
+            if (Session::has('coupon')) {
+                Session::forget('coupon');
+            }
+
+            return redirect()->route('home')->withSuccess('Order Placed Successfully');
+            // Amarpay Payment Gateway
+        } elseif ($request->payment_type == 'AmarPay') {
+            $amarpay = DB::table('payment_gateways')->first();
+            if ($amarpay->store_id == null) {
+                return back()->with('error', 'Please Set Your Id First');
+            } else {
+                if ($amarpay->status == 1) {
+
+                    $url = 'https://secure.aamarpay.com/request.php';
+                } else {
+                    
+                    $url = 'https://sandbox.aamarpay.com/request.php';
+                }
+
+                // live url https://secure.aamarpay.com/request.php
+                $fields = array(
+                    'store_id' => $amarpay->store_id, //store id will be aamarpay,  contact integration@aamarpay.com for test/live id
+                    'amount' => '200', //transaction amount
+                    'payment_type' => 'VISA', //no need to change
+                    'currency' => 'BDT',  //currenct will be USD/BDT
+                    'tran_id' => rand(1111111, 9999999), //transaction id must be unique from your end
+                    'cus_name' => 'customer name',  //customer name
+                    'cus_email' => 'customeremail@mail.com', //customer email address
+                    'cus_add1' => 'Dhaka',  //customer address
+                    'cus_add2' => 'Mohakhali DOHS', //customer address
+                    'cus_city' => 'Dhaka',  //customer city
+                    'cus_state' => 'Dhaka',  //state
+                    'cus_postcode' => '1206', //postcode or zipcode
+                    'cus_country' => 'Bangladesh',  //country
+                    'cus_phone' => '1231231231231', //customer phone number
+                    'cus_fax' => 'Not¬Applicable',  //fax
+                    'ship_name' => 'ship name', //ship name
+                    'ship_add1' => 'House B-121, Road 21',  //ship address
+                    'ship_add2' => 'Mohakhali',
+                    'ship_city' => 'Dhaka',
+                    'ship_state' => 'Dhaka',
+                    'ship_postcode' => '1212',
+                    'ship_country' => 'Bangladesh',
+                    'desc' => 'payment description',
+                    'success_url' => route('success'), //your success route
+                    'fail_url' => route('fail'), //your fail route
+                    'cancel_url' => 'http://localhost/foldername/cancel.php', //your cancel url
+                    'opt_a' => 'Reshad',  //optional paramter
+                    'opt_b' => 'Akil',
+                    'opt_c' => 'Liza',
+                    'opt_d' => 'Sohel',
+                    'signature_key' => $amarpay->signature_key
+                ); //signature key will provided aamarpay, contact integration@aamarpay.com for test/live signature key
+
+                $fields_string = http_build_query($fields);
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_VERBOSE, true);
+                curl_setopt($ch, CURLOPT_URL, $url);
+
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                $url_forward = str_replace('"', '', stripslashes(curl_exec($ch)));
+                curl_close($ch);
+
+                $this->redirect_to_merchant($url_forward);
+            }
         }
-        $order['order_id'] = rand(00001, 9000000);
-        $order['date'] = date('d-m-Y');
-        $order['month'] = date('F');
-        $order['year'] = date('Y');
-        // insertGetId for get id when data save
-        $order_id = Order::insertGetId($order);
+    }
 
-        Mail::to($request->email)->send(new InvoiceMail($order));
+    function redirect_to_merchant($url)
+    {
 
-        $contents = Cart::content();
+?>
+        <html xmlns="http://www.w3.org/1999/xhtml">
 
+        <head>
+            <script type="text/javascript">
+                function closethisasap() {
+                    document.forms["redirectpost"].submit();
+                }
+            </script>
+        </head>
 
-        $order_details = new Order_detail();
-        foreach ($contents as $content) {
-            $order_details->order_id = $order_id;
-            $order_details->product_id = $content->id;
-            $order_details->product_name = $content->name;
-            $order_details->quantity = $content->qty;
-            $order_details->single_price = $content->price;
-            $order_details->subtotal_price = $content->price * $content->qty;
-            $order_details->save();
-        }
-        Cart::destroy();
-        if (Session::has('coupon')) {
-            Session::forget('coupon');
-        }
+        <body onLoad="closethisasap();">
 
-        return redirect()->route('home')->withSuccess('Order Placed Successfully');
+            <form name="redirectpost" method="post" action="<?php echo 'https://sandbox.aamarpay.com/' . $url; ?>"></form>
+            <!-- for live url https://secure.aamarpay.com -->
+        </body>
+
+        </html>
+<?php
+        exit;
+    }
+
+    public function success(Request $request)
+    {
+        return $request;
+    }
+
+    public function fail(Request $request)
+    {
+        return $request;
     }
 
     public function order_list()

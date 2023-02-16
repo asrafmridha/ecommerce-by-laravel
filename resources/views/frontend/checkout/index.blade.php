@@ -67,8 +67,8 @@
                                         <input type="radio" class="form-control mt-1" name="payment_type" value="Paypal">
                                     </div>
                                      <div class="form-group col-lg-4">
-                                        <label for="">SSL COMMERZ</label>
-                                        <input type="radio" class="form-control" name="payment_type" value="SSL COMMERZ">
+                                        <label for="">Bkash/Rocket/Nagad</label>
+                                        <input type="radio" class="form-control" name="payment_type" value="AmarPay">
                                     </div>
 
                                      <div class="form-group col-lg-4">

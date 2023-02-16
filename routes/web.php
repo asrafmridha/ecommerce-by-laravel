@@ -70,6 +70,10 @@ Route::post('order/place', [OrderController::class, 'order_place'])->name('order
 Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
 Route::post('order/track', [OrderController::class, 'order_track'])->name('order.track');
 
+Route::post('/success', [OrderController::class, 'success'])->name('success');
+
+Route::post('/fail', [OrderController::class, 'fail'])->name('fail');
+
 
 
 // Route::get('cart/destroy', function () {
