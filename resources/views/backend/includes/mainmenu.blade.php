@@ -135,7 +135,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="d-flex align-items-center" href=""><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Payment Gateway</span>
+                    <a class="d-flex align-items-center" href="{{ route('payment.gateway') }}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Payment Gateway</span>
                     </a>
                 </li>
             </ul>

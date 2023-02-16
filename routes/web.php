@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\DynamicPageController;
+use App\Http\Controllers\Backend\PaymentGateWayController;
 use App\Http\Controllers\Backend\PickupController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -68,6 +69,8 @@ Route::get('coupon/remove', [CheckoutController::class, 'coupon_remove'])->name(
 Route::post('order/place', [OrderController::class, 'order_place'])->name('order.place');
 Route::get('order/list', [OrderController::class, 'order_list'])->name('order.list');
 Route::post('order/track', [OrderController::class, 'order_track'])->name('order.track');
+
+
 
 // Route::get('cart/destroy', function () {
 //   Cart::destroy();
@@ -164,10 +167,10 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
 
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
-
   Route::post('admin/profile/update/{id}', [ProfileController::class, 'profile_update'])->name('admin.profile.update');
-
   Route::post('admin/update/{id}', [ProfileController::class, 'update'])->name('admin.update');
-
   Route::post('reset/password', [ProfileController::class, 'reset_password'])->name('reset-password');
+
+  Route::get('payment/gateway', [PaymentGateWayController::class, 'index'])->name('payment.gateway');
+  Route::post('amarpay/update/{id}', [PaymentGateWayController::class, 'amarpay_update'])->name('amarpay.update');
 });

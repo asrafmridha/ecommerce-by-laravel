@@ -56,44 +56,48 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <h4 class="card-title">AmarPay Payment Gateway</h4>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="email">Signature Key</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                    <form action="{{ route('amarpay.update',$amarpay->id) }}" method="POST">
+                                    @csrf
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="amarpay_gateway_name">Signature Key</label>
+                                                <input type="text" name="amarpay_gateway_name" value="{{ $amarpay->gateway_name }}" id="email" class="form-control" placeholder=""/>
+                                                @error('amarpay_gateway_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label for="email">StoreId</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
-                                                <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="amarpay_store_id">StoreId</label>
+                                                <input type="text" name="amarpay_store_id" value="{{ $amarpay->store_id }}" id="email" class="form-control" placeholder=""/>
+                                                @error('amarpay_store_id')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-float waves-light w-100 w-sm-auto">update</button>
-                                    </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-float waves-light w-100 w-sm-auto">update</button>
+                                        </div>
+                                    </form>
                                 </div>
+                                   
                                 <div class="col-md-4">
                                     <h4 class="card-title">SurjoPay Payment Gateway</h4>
                                      <div class="col-12">
                                         <div class="form-group">
-                                            <label for="email">Signature Key</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
+                                            <label for="surjopay_gateway_name">Signature Key</label>
+                                            <input type="text" name="surjopay_gateway_name" value="{{ $surjopay->gateway_name }}" id="email" class="form-control" placeholder=""/>
+                                            @error('surjopay_gateway_name')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="email">StoreId</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
+                                            <label for="surjopay_store_id">StoreId</label>
+                                            <input type="text" name="surjopay_store_id" value="{{ $surjopay->store_id }}" id="email" class="form-control" placeholder=""/>
+                                            @error('surjopay_store_id')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
@@ -106,18 +110,18 @@
                                     <h4 class="card-title">Ssl Commerz Payment Gateway</h4>
                                      <div class="col-12">
                                         <div class="form-group">
-                                            <label for="email">Signature Key</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
+                                            <label for="sslcommerz_gateway_name">Signature Key</label>
+                                            <input type="text" name="sslcommerz_gateway_name" value="{{ $sslcommerz->gateway_name }}" id="email" class="form-control" placeholder=""/>
+                                            @error('sslcommerz_gateway_name')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="email">StoreId</label>
-                                            <input type="text" name="company_name" value="" id="email" class="form-control" placeholder=""/>
-                                            @error('company_name')
+                                            <label for="sslcommerz_store_id">StoreId</label>
+                                            <input type="text" name="sslcommerz_store_id" value="{{ $sslcommerz->store_id }}" id="email" class="form-control" placeholder=""/>
+                                            @error('sslcommerz_store_id')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
