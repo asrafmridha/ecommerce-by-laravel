@@ -169,6 +169,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
 
   Route::post('/pages/update/{id}', [DynamicPageController::class, 'update'])->name('page.update');
 
+  // Order List
+  Route::get('order/list/admin', [OrderController::class, 'order_list_admin'])->name('order.list.admin');
+
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');
   Route::post('admin/profile/update/{id}', [ProfileController::class, 'profile_update'])->name('admin.profile.update');

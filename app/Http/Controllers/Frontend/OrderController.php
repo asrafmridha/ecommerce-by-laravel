@@ -20,6 +20,7 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+    
     }
 
     public function order_place(Request $request)
@@ -254,5 +255,10 @@ class OrderController extends Controller
             $order_details = Order_detail::where('id', $check->id)->get();
             return view('frontend.order.track_result', compact('categorires', 'order_details', 'check'));
         }
+    }
+
+    //For admin
+    public function order_list_admin()
+    {
     }
 }

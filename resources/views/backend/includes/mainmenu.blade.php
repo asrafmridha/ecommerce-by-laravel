@@ -96,6 +96,10 @@
             </ul>
         </li>
 
+        <li class="@yield('order_list') nav-item"><a class="d-flex align-items-center" href="{{route('order.list.admin')}}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Order List</span></a>
+            
+        </li>
+
 
         <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Offer</span><i data-feather="more-horizontal"></i>
             </li>
