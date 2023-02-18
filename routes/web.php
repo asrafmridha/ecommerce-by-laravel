@@ -171,6 +171,9 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
 
   // Order List
   Route::get('order/list/admin', [OrderController::class, 'order_list_admin'])->name('order.list.admin');
+  //Order Status
+
+  Route::get('$order/status/{id}', [OrderController::class, 'order_status'])->name('order.status');
 
   //Profile Section
   Route::get('my/profile', [ProfileController::class, 'myprofile'])->name('myprofile');

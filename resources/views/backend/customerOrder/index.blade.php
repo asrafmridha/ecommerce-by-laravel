@@ -100,9 +100,9 @@
                                     <td>{{ $order->date }}</td>
                                     <td>
                                         @if($order->status==0)
-                                            <button class="btn btn-danger">Pending</button>
+                                            <a href="{{ route('order.status',$order->id) }}" class="btn btn-danger">Pending</a>
                                             @else
-                                            <button class="btn btn-success">Success</button>
+                                            <a href="{{ route('order.status',$order->id) }}" class="btn btn-success">Success</a>
                                         @endif
                                     </td>
                                

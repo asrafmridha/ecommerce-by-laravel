@@ -260,6 +260,20 @@ class OrderController extends Controller
     public function order_list_admin()
     {
         $orders = Order::all();
-        return view('backend.customerOrder.index',compact('orders'));
+        return view('backend.customerOrder.index', compact('orders'));
+    }
+
+    public function order_status($id)
+    {
+        $order = Order::find($id);
+        if ($order->status == 0) {
+            $order->status = 1;
+        } else {
+
+            $order->status = 0;
+        }
+
+        $order->update();
+        return back()->withSuccess('Status Changed Successfully');
     }
 }
