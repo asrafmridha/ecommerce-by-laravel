@@ -20,7 +20,6 @@ class OrderController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-    
     }
 
     public function order_place(Request $request)
@@ -260,5 +259,7 @@ class OrderController extends Controller
     //For admin
     public function order_list_admin()
     {
+        $orders = Order::all();
+        return view('backend.customerOrder.index',compact('orders'));
     }
 }
