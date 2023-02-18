@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Mail\InvoiceMail;
+use App\Mail\OrderConfirmMail;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Order_detail;
@@ -268,8 +269,8 @@ class OrderController extends Controller
         $order = Order::find($id);
         if ($order->status == 0) {
             $order->status = 1;
+            Mail::to($order->c_email)->send(new OrderConfirmMail);
         } else {
-
             $order->status = 0;
         }
 

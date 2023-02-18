@@ -1,0 +1,1 @@
+<p>Your Order are confirmed..Please Wait</p>
