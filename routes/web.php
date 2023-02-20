@@ -148,16 +148,12 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
 
   Route::post('/generalSetting-update/{id}', [SettingController::class, 'generalSetting_update'])->name('generalSettings.update');
 
-
-
   // Smtp  
   Route::get('/smtp', [SmtpController::class, 'index'])->name('smtp.index');
   Route::post('/smtp/{id}', [SmtpController::class, 'update'])->name('smtp.update');
 
   // Global Route 
   Route::get('/childcategory/join/{id?}', [ChildCategoryController::class, 'Getchildcategory'])->name('childcategory-join');
-
-
   //Dynamic Page
 
   Route::get('/pages', [DynamicPageController::class, 'index'])->name('page.index');
@@ -182,5 +178,4 @@ Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'is_admin']], funct
   Route::post('reset/password', [ProfileController::class, 'reset_password'])->name('reset-password');
 
   Route::get('payment/gateway', [PaymentGateWayController::class, 'index'])->name('payment.gateway');
-  Route::post('amarpay/update/{id}', [PaymentGateWayController::class, 'amarpay_update'])->name('amarpay.update');
-});
+  Route::post('amarpay/update/{id}', [PaymentGateWayController::class, 'amarpay_update'])->name('amarpay.update'

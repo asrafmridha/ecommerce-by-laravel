@@ -100,7 +100,7 @@
                                      
                                   </div><!-- form-group -->
                                   <button type="submit" class="mb-3 btn btn-info btn-block">Sign In</button>
-
+                             <a href=""><i data-feather='facebook'>f</i></a>
                                 
                                  
                                 </form>
@@ -121,6 +121,7 @@
                                         @endif
                                     </div>
                                     <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}" class="tx-info">Sign Up</a>
+                                        
                                 </div>
                             </div>
                             {{--   my div  --}}
